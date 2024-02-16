@@ -1,5 +1,6 @@
 #pragma once
 #include "Audience.h"
+#include "Student.h"
 #include <iostream>
 #include <string>
 
@@ -7,21 +8,27 @@ using namespace std;
 class indexTable
 {
 private:
-	int Key;
 	int AudienceNumber;
+	Audience* AudienceLink;
 	indexTable* Next;
 public:
 	//methods
 
 	indexTable() {
-		this->Key = this->AudienceNumber = 0;
+		this->AudienceNumber = 0;
+		this->AudienceLink = NULL;
 		this->Next = NULL;
 	}
 
-	void setKey(indexTable* tail);
+	indexTable* head = new indexTable;
+	indexTable* tail = new indexTable;
 
 	void setAudienceNumber(int num);
 
-	void addNewItem(Audience aud , indexTable** head, indexTable** tail);
+	int getAudienceNumber();
+
+	void addNewItem(Audience aud, indexTable** head, indexTable** tail);
+
+	void findAudience(Student stud, indexTable* head);
 };
 
