@@ -130,7 +130,9 @@
     <ClCompile Include="Audience.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="indexTable.cpp" />
+    <ClCompile Include="indexTableList.cpp" />
     <ClCompile Include="lab1.cpp" />
+    <ClCompile Include="indexNode.cpp" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="StudentList.cpp" />
   </ItemGroup>
@@ -138,6 +140,8 @@
     <ClInclude Include="Audience.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="indexTable.h" />
+    <ClInclude Include="indexNode.h" />
+    <ClInclude Include="indexTableList.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="StudentList.h" />
   </ItemGroup>

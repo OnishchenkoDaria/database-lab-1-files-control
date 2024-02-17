@@ -5,11 +5,26 @@
 #include "Audience.h"
 #include "Student.h"
 #include "indexTable.h"
+#include "indexNode.h"
+#include "indexTableList.h"
 using namespace std;
 
 int main()
 {
-    indexTable Table;
+    Audience aud1;
+    indexTable obj1(aud1);
+    Audience aud2;
+    indexTable obj2(aud2);
+    Audience aud3;
+    indexTable obj3(aud3);
+    indexTableList Table;
+    Table.addNewItem(obj1);
+    Table.addNewItem(obj2);
+    Table.addNewItem(obj3);
+    Table.showAllList();
+    cout << "Hello World!\n";
+
+    /*indexTable Table;
     indexTable* head = new indexTable;
     indexTable* tail = new indexTable;
     head = tail = NULL;
@@ -18,8 +33,8 @@ int main()
     Audience aud1;
     Table.addNewItem(aud, &head, &tail);
     Table.addNewItem(aud1, &head, &tail);
-    Table.printTable(head);
-    cout << "Hello World!\n";
+    Table.printTable(head);*/
+   
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

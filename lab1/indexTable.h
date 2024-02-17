@@ -10,16 +10,20 @@ class indexTable
 private:
 	int AudienceNumber;
 	Audience* AudienceLink;
-	indexTable* Next;
+	//indexTable* Next;
 public:
 	//methods
 
 	indexTable() {
 		this->AudienceNumber = 0;
 		this->AudienceLink = NULL;
-		this->Next = NULL;
+		//this->Next = NULL;
 	}
 
+	indexTable(Audience aud){
+		this->AudienceNumber = aud.getNumber();
+		this->AudienceLink = &aud;
+	}
 	//indexTable* head = new indexTable;
 	//indexTable* tail = new indexTable;
 
@@ -27,10 +31,20 @@ public:
 
 	int getAudienceNumber();
 
-	void addNewItem(Audience aud, indexTable** head, indexTable** tail);
+	void setAudienceLink(Audience &aud) {
+		this->AudienceLink = &aud;
+	}
 
-	void findAudience(Student stud, indexTable* head);
+	Audience* getAudienceLink() {
+		return this->AudienceLink;
+	}
 
-	void printTable(indexTable* head);
+	//ÏĞÀÖŞŞ×² ÌÅÒÎÄÈ ÍÈÆ×Å 
+	
+	//void addNewItem(Audience aud, indexTable** head, indexTable** tail);
+
+	//void findAudience(Student stud, indexTable* head);
+
+	//void printTable(indexTable* head);
 };
 

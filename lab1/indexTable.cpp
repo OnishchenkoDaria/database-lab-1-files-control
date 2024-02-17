@@ -32,7 +32,9 @@ int indexTable::getAudienceNumber() {
 	}
 }*/
 
-void indexTable::addNewItem(Audience aud, indexTable** head, indexTable** tail) {
+//переписати функцыю нище
+
+/*void indexTable::addNewItem(Audience aud, indexTable** head, indexTable** tail) {
 	indexTable* temp = new indexTable;
 	cout << aud.getNumber() << endl;
 	temp->AudienceNumber = aud.getNumber();
@@ -42,7 +44,7 @@ void indexTable::addNewItem(Audience aud, indexTable** head, indexTable** tail) 
 	if (!(*head)){
 		cout << "if" << endl;
 		*head = *tail = temp;
-		//temp->AudienceNumber = aud.getNumber();
+		
 		temp->Next = NULL;
 		cout << "head: " << (*head)->AudienceNumber << endl;
 	}
@@ -58,8 +60,7 @@ void indexTable::addNewItem(Audience aud, indexTable** head, indexTable** tail) 
 				temp->Next = find->Next;
 				free(find);
 				free(prev);
-				//temp->Key = prev->Key + 1;
-				//look carefully whether you have freed all memory needed
+				
 			}
 			else {
 				if (find->Next != NULL) {
@@ -72,7 +73,7 @@ void indexTable::addNewItem(Audience aud, indexTable** head, indexTable** tail) 
 					cout << "yipeeeeeeeee" << endl;
 					cout << (*tail)->AudienceNumber << endl;
 					(*tail)->Next = temp;
-					//temp->Key = (*tail)->Key + 1;
+					
 					temp->Next = NULL;
 					*tail = temp;
 					cout <<"head: < " << (*head)->AudienceNumber << endl;
@@ -105,4 +106,4 @@ void indexTable::findAudience(Student stud, indexTable* head) {
 
 		}
 	}
-}
+}*/
