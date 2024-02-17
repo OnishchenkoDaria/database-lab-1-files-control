@@ -49,7 +49,7 @@ void Audience::changeVisibility() {
 	}
 }
 
-void Audience::createAudienceObj() {
+/*void Audience::createAudienceObj() {
 	cout << "Insert AUDIENCE number:   ";
 	cin >> this->Number;
 	cout << "Insert AUDIENCE floor:   ";
@@ -61,4 +61,4 @@ void Audience::createAudienceObj() {
 	cout << "Insert AUDIENCE location Faculty:   ";
 	cin >> this->Faculty;
 	this->Visibility = true;
-}
+}*/

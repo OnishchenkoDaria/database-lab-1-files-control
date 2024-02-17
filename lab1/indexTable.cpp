@@ -34,15 +34,20 @@ int indexTable::getAudienceNumber() {
 
 void indexTable::addNewItem(Audience aud, indexTable** head, indexTable** tail) {
 	indexTable* temp = new indexTable;
+	cout << aud.getNumber() << endl;
 	temp->AudienceNumber = aud.getNumber();
+	temp->AudienceLink = &aud;
+	cout << temp->AudienceNumber << endl;
 
 	if (!(*head)){
+		cout << "if" << endl;
 		*head = *tail = temp;
-		temp->AudienceNumber = aud.getNumber();
-		temp->AudienceLink = &aud;
+		//temp->AudienceNumber = aud.getNumber();
 		temp->Next = NULL;
+		cout << "head: " << (*head)->AudienceNumber << endl;
 	}
 	else {
+		cout<<"else"<<endl;
 		indexTable *find, *prev;
 		find = prev = *head;
 		if (find) {
@@ -51,6 +56,8 @@ void indexTable::addNewItem(Audience aud, indexTable** head, indexTable** tail) 
 				//need to fill and link with prev and next
 				prev->Next = temp;
 				temp->Next = find->Next;
+				free(find);
+				free(prev);
 				//temp->Key = prev->Key + 1;
 				//look carefully whether you have freed all memory needed
 			}
@@ -58,17 +65,35 @@ void indexTable::addNewItem(Audience aud, indexTable** head, indexTable** tail) 
 				if (find->Next != NULL) {
 					prev = find;
 					find = find->Next;
+					free(find);
+					free(prev);
 				}
 				else {
+					cout << "yipeeeeeeeee" << endl;
+					cout << (*tail)->AudienceNumber << endl;
 					(*tail)->Next = temp;
 					//temp->Key = (*tail)->Key + 1;
 					temp->Next = NULL;
 					*tail = temp;
+					cout <<"head: < " << (*head)->AudienceNumber << endl;
+					cout <<"tail: < " << (*tail)->AudienceNumber << endl;
 				}
 			}
 		}
-		free(find);
-		free(prev);
+	}
+}
+
+void indexTable::printTable(indexTable* head) {
+	if (!head) {
+		cout << "Empty indexTable!" << endl;
+	}
+	else {
+		cout << "print start";
+		while (head) {
+			cout << "loop" << endl;
+			cout << "Audience Number (Key): " << head->AudienceNumber << " Audience Link: " << head->AudienceLink << endl;
+			head = head->Next;
+		}
 	}
 }
 

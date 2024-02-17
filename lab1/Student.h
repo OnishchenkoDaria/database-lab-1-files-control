@@ -16,6 +16,23 @@ private:
 
 public:
 	//methods
+
+	Student() {
+		cout << "Insert STUDENT'S id card number:  ";
+		cin >> this->StudentId;
+		cout << "Insert STUDENT'S Fullname:  ";
+		cin >> this->FullName;
+		cout << "Insert STUDENT'S birth date:  ";
+		cin >> this->BirthDate;
+		cout << "Insert STUDENT'S gender:  ";
+		cin >> this->Gender;
+		cout << "Insert STUDENT'S group:  ";
+		cin >> this->GroupName;
+		cout << "Insert STUDENT'S audience number:  ";
+		cin >> this->Audience;
+		this->Visibility = true;
+	}
+
 	void setId(int id);
 
 	int getId();
@@ -42,5 +59,5 @@ public:
 
 	void changeVisibility();
 
-	void createStudentObj();
+	//void createStudentObj();
 };

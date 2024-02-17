@@ -4,12 +4,21 @@
 #include <iostream>
 #include "Audience.h"
 #include "Student.h"
+#include "indexTable.h"
 using namespace std;
 
 int main()
 {
+    indexTable Table;
+    indexTable* head = new indexTable;
+    indexTable* tail = new indexTable;
+    head = tail = NULL;
+    Table.printTable(head);
     Audience aud;
-    Student stud;
+    Audience aud1;
+    Table.addNewItem(aud, &head, &tail);
+    Table.addNewItem(aud1, &head, &tail);
+    Table.printTable(head);
     cout << "Hello World!\n";
 }
 

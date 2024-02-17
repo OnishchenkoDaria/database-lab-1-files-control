@@ -16,6 +16,20 @@ private:
 public:
 	//methods
 
+	Audience() {
+		cout << "Insert AUDIENCE number:   ";
+		cin >> this->Number;
+		cout << "Insert AUDIENCE floor:   ";
+		cin >> this->Floor;
+		cout << "Insert AUDIENCE type:   ";
+		cin >> this->Type;
+		cout << "Insert AUDIENCE location University:   ";
+		cin >> this->University;
+		cout << "Insert AUDIENCE location Faculty:   ";
+		cin >> this->Faculty;
+		this->Visibility = true;
+	}
+
 	void setNumber(int number);
 
 	int getNumber();
@@ -38,5 +52,5 @@ public:
 
 	void changeVisibility();
 
-	void createAudienceObj();
+	//void createAudienceObj();
 };

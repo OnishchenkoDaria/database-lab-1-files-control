@@ -57,7 +57,7 @@ void Student::changeVisibility() {
 	}
 }
 
-void Student::createStudentObj() {
+/*void Student::createStudentObj() {
 	cout << "Insert STUDENT'S id card number:  ";
 	cin >> this->StudentId;
 	cout << "Insert STUDENT'S Fullname:  ";
@@ -70,7 +70,7 @@ void Student::createStudentObj() {
 	cin >> this->GroupName;
 	cout << "Insert STUDENT'S audience number:  ";
 	cin >> this->Audience;
-	this->Visibility = true;
+	this->Visibility = true;*/
 	// go to the index table and find the right (adress) number of audience
 	// choose the sudience and add the student to the list (slave) by adding to tail and make this object a new tail
-}
+//}

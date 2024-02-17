@@ -20,8 +20,8 @@ public:
 		this->Next = NULL;
 	}
 
-	indexTable* head = new indexTable;
-	indexTable* tail = new indexTable;
+	//indexTable* head = new indexTable;
+	//indexTable* tail = new indexTable;
 
 	void setAudienceNumber(int num);
 
@@ -30,5 +30,7 @@ public:
 	void addNewItem(Audience aud, indexTable** head, indexTable** tail);
 
 	void findAudience(Student stud, indexTable* head);
+
+	void printTable(indexTable* head);
 };
 
