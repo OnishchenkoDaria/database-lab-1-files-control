@@ -13,3 +13,20 @@ void indexTableList::showAllList() {
 		temp = temp->getNext();
 	}
 }
+
+Audience* indexTableList::findStudentAudience(Student stud) {
+	int AudNumber = stud.getAudience();
+	indexNode* temp = head;
+	while (temp != NULL) {
+		if (temp->getItemData().getAudienceNumber() == AudNumber) {
+			cout << "Found: Audience: " << temp->getItemData().getAudienceNumber()
+				 << "   Link: " << temp->getItemData().getAudienceLink() << endl;
+			return temp->getItemData().getAudienceLink();
+		}
+		else {
+			temp = temp->getNext();
+		}
+	}
+	cout << "Error. No Audience with such a Number was recorded" << endl;
+	return NULL;
+}

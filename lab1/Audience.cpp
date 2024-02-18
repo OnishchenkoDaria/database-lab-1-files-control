@@ -49,16 +49,20 @@ void Audience::changeVisibility() {
 	}
 }
 
-/*void Audience::createAudienceObj() {
-	cout << "Insert AUDIENCE number:   ";
-	cin >> this->Number;
-	cout << "Insert AUDIENCE floor:   ";
-	cin >> this->Floor;
-	cout << "Insert AUDIENCE type:   ";
-	cin >> this->Type;
-	cout << "Insert AUDIENCE location University:   ";
-	cin >> this->University;
-	cout << "Insert AUDIENCE location Faculty:   ";
-	cin >> this->Faculty;
-	this->Visibility = true;
-}*/
+void Audience::setStudentSubList(StudentList head) {
+	this->Students = head;
+}
+
+StudentList Audience::getStudentSubList() {
+	return this->Students;
+}
+
+void Audience::showObject() {
+	cout << " ID Number: " << this->getNumber()
+		<< " Floor: " << this->getFloor()
+		<< " Type: " << this->getType()
+		<< " University: " << this->getUniversity()
+		<< " Faculty: " << this->getFaculty()
+		<< " Visibility: " << this->Visibility
+		<< " List LINK: " << this->getStudentSubList().getHeadLink() << endl;
+}

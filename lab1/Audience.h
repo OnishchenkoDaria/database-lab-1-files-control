@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include "StudentList.h"
 
 using namespace std;
 class Audience
@@ -12,6 +13,7 @@ private:
 	string University;
 	string Faculty;
 	bool Visibility{};
+	StudentList Students;
 
 public:
 	//methods
@@ -52,5 +54,9 @@ public:
 
 	void changeVisibility();
 
-	//void createAudienceObj();
+	void setStudentSubList(StudentList head);
+
+	StudentList getStudentSubList();
+
+	void showObject();
 };

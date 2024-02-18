@@ -16,11 +16,11 @@ string Student::getName() {
 	return this->FullName;
 }
 
-void Student::setDate(int date){
+void Student::setDate(string date){
 	this->BirthDate = date;
 }
 
-int Student::getDate() {
+string Student::getDate() {
 	return this->BirthDate;
 }
 
@@ -57,7 +57,7 @@ void Student::changeVisibility() {
 	}
 }
 
-/*void Student::createStudentObj() {
+void Student::createObj() {
 	cout << "Insert STUDENT'S id card number:  ";
 	cin >> this->StudentId;
 	cout << "Insert STUDENT'S Fullname:  ";
@@ -70,7 +70,15 @@ void Student::changeVisibility() {
 	cin >> this->GroupName;
 	cout << "Insert STUDENT'S audience number:  ";
 	cin >> this->Audience;
-	this->Visibility = true;*/
-	// go to the index table and find the right (adress) number of audience
-	// choose the sudience and add the student to the list (slave) by adding to tail and make this object a new tail
-//}
+	this->Visibility = true;
+}
+
+void Student::showObject() {
+	cout << " ID: " << this->getId()
+		<< " Name: " << this->getName()
+		<< " Birth Date: " << this->getDate()
+		<< " Gender: " << this->getGender()
+		<< " Group: " << this->getGroup()
+		<< " Audience: " << this->getAudience()
+		<< " Visibility: " << this->Visibility << endl;
+}

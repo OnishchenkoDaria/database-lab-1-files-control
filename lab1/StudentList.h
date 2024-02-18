@@ -1,5 +1,6 @@
 #pragma once
 #include "Student.h"
+#include "StudentNode.h"
 #include <iostream>
 #include <string>
 
@@ -7,10 +8,16 @@ using namespace std;
 class StudentList
 {
 private:
-	Student StudentData;
-	Student* Next;
+	StudentNode* head;
 public:
 	//methods
+	StudentList() {
+		head = NULL;
+	}
 
-	void AddItemToList();
+	StudentNode* getHeadLink();
+
+	void AddItemStudentList(const Student &stud);
+
+	void showList();
 };

@@ -21,4 +21,6 @@ public:
 	void addNewItem(const indexTable& aud);
 
 	void showAllList();
+
+	Audience* findStudentAudience(Student stud);
 };

@@ -135,6 +135,7 @@
     <ClCompile Include="indexNode.cpp" />
     <ClCompile Include="Student.cpp" />
     <ClCompile Include="StudentList.cpp" />
+    <ClCompile Include="StudentNode.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audience.h" />
@@ -144,6 +145,7 @@
     <ClInclude Include="indexTableList.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="StudentList.h" />
+    <ClInclude Include="StudentNode.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

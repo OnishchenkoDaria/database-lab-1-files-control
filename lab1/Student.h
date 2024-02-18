@@ -8,7 +8,7 @@ class Student
 private:
 	int StudentId{};
 	string FullName;
-	int BirthDate{};
+	string BirthDate{};
 	char Gender{};
 	string GroupName;
 	int Audience{};
@@ -18,18 +18,16 @@ public:
 	//methods
 
 	Student() {
-		cout << "Insert STUDENT'S id card number:  ";
-		cin >> this->StudentId;
-		cout << "Insert STUDENT'S Fullname:  ";
-		cin >> this->FullName;
-		cout << "Insert STUDENT'S birth date:  ";
-		cin >> this->BirthDate;
-		cout << "Insert STUDENT'S gender:  ";
-		cin >> this->Gender;
-		cout << "Insert STUDENT'S group:  ";
-		cin >> this->GroupName;
-		cout << "Insert STUDENT'S audience number:  ";
-		cin >> this->Audience;
+		this->Visibility = true;
+		this->Audience = NULL;
+	}
+
+	Student(int id, string name, string birthdate, char gender, string group, int aud) {
+		this->setId(id);
+		this->setDate(birthdate);
+		this->setGender(gender);
+		this->setGroup(group);
+		this->setAudience(aud);
 		this->Visibility = true;
 	}
 
@@ -41,9 +39,9 @@ public:
 
 	string getName();
 
-	void setDate(int date);
+	void setDate(string date);
 
-	int getDate();
+	string getDate();
 
 	void setGender(char gender);
 
@@ -59,5 +57,7 @@ public:
 
 	void changeVisibility();
 
-	//void createStudentObj();
+	void showObject();
+
+	void createObj();
 };

@@ -22,6 +22,25 @@ int main()
     Table.addNewItem(obj2);
     Table.addNewItem(obj3);
     Table.showAllList();
+
+    //Students
+    Student stud1;
+    stud1.createObj();
+    //the function below returns the address of the audience (master record)
+    Audience* found = Table.findStudentAudience(stud1);
+    cout << " Address: " << found << endl;
+    Audience decoded = *found;
+    //make print method for single object
+    cout << "OBJECT: ";
+    // CHECK WHY THE UNIVERSITY FACULTY AND TYPE IS NOT SHOWN
+    decoded.showObject();
+
+    //somewhere after here the constructor is summoned!!!!!
+
+    StudentList List = decoded.getStudentSubList();
+    List.AddItemStudentList(stud1);
+    List.showList();
+
     cout << "Hello World!\n";
 
     /*indexTable Table;
