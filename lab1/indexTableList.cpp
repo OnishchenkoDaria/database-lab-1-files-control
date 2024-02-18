@@ -1,6 +1,6 @@
 #include "indexTableList.h"
 
-void indexTableList::addNewItem(const indexTable & aud){
+void indexTableList::addNewItem(const indexTable& aud){
 	indexNode* temp = new indexNode(aud);
 	temp->setNext(head);
 	head = temp;
@@ -9,7 +9,7 @@ void indexTableList::addNewItem(const indexTable & aud){
 void indexTableList::showAllList() {
 	indexNode* temp = head;
 	while (temp != NULL) {
-		cout << "Key (AUDIENCE NUMBER): " << temp->getItemData().getAudienceLink() << "   Address: " << temp->getItemData().getAudienceNumber() << endl;
+		cout << "Key (AUDIENCE NUMBER): " << temp->getItemData().getAudienceNumber() << "   Address: " << temp->getItemData().getAudienceLink() << endl;
 		temp = temp->getNext();
 	}
 }

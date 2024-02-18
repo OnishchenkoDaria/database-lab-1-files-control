@@ -20,9 +20,9 @@ public:
 		//this->Next = NULL;
 	}
 
-	indexTable(Audience aud){
-		this->AudienceNumber = aud.getNumber();
-		this->AudienceLink = &aud;
+	indexTable(int num, Audience* address){
+		this->AudienceNumber = num;
+		this->AudienceLink = address;
 	}
 	//indexTable* head = new indexTable;
 	//indexTable* tail = new indexTable;

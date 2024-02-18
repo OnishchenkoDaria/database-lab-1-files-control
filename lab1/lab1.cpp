@@ -12,16 +12,30 @@ using namespace std;
 int main()
 {
     Audience aud1;
-    indexTable obj1(aud1);
+    cout << " >>>ADDRESS : " << &aud1 << endl;
+    indexTable obj1(aud1.getNumber(), &aud1);
+    cout << " >>>ADDRESS : " << &aud1 << endl;
+    cout << " INDEXTABLE ADDRESS: " << obj1.getAudienceLink() << endl;
+
     Audience aud2;
-    indexTable obj2(aud2);
+    cout << " >>>ADDRESS : " << &aud2 << endl;
+    indexTable obj2(aud2.getNumber(), &aud2);
+    cout << " INDEXTABLE ADDRESS: " << obj2.getAudienceLink() << endl;
     Audience aud3;
-    indexTable obj3(aud3);
+    cout << " >>>ADDRESS : " << &aud3 << endl;
+    indexTable obj3(aud3.getNumber(), &aud3);
+    cout << " INDEXTABLE ADDRESS: " << obj3.getAudienceLink() << endl;
+    
     indexTableList Table;
     Table.addNewItem(obj1);
     Table.addNewItem(obj2);
     Table.addNewItem(obj3);
     Table.showAllList();
+   
+    //print
+    aud1.showObject();
+    aud2.showObject();
+    aud3.showObject();
 
     //Students
     Student stud1;
@@ -29,6 +43,7 @@ int main()
     //the function below returns the address of the audience (master record)
     Audience* found = Table.findStudentAudience(stud1);
     cout << " Address: " << found << endl;
+
     Audience decoded = *found;
     //make print method for single object
     cout << "OBJECT: ";
@@ -39,7 +54,11 @@ int main()
 
     StudentList List = decoded.getStudentSubList();
     List.AddItemStudentList(stud1);
+    decoded.setStudentSubList(List);
     List.showList();
+
+    cout << " OBJECT CHANGED" << endl;
+    decoded.showObject();
 
     cout << "Hello World!\n";
 

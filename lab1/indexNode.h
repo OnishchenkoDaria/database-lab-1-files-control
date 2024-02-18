@@ -13,6 +13,7 @@ public:
 	
 	indexNode(const indexTable& obj) {
 		this->item = obj;
+		cout << "Making Node: " << this->item.getAudienceNumber() << " " << this->item.getAudienceLink() << endl;
 		this->Next = NULL;
 	}
 
