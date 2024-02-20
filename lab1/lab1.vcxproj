@@ -143,9 +143,13 @@
     <ClInclude Include="indexTable.h" />
     <ClInclude Include="indexNode.h" />
     <ClInclude Include="indexTableList.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Student.h" />
     <ClInclude Include="StudentList.h" />
     <ClInclude Include="StudentNode.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="lab1.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

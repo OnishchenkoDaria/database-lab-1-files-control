@@ -7,9 +7,10 @@
 #include "indexTable.h"
 #include "indexNode.h"
 #include "indexTableList.h"
+#include "Functions.h"
 using namespace std;
 
-Audience readFromFile(ifstream& file) {
+/*Audience readFromFile(ifstream& file) {
     int num, floor;
     string type, uni, faculty;
     bool visib;
@@ -17,59 +18,57 @@ Audience readFromFile(ifstream& file) {
     file >> num >> floor >> type >> uni >> faculty >> visib;
     cout << num << floor << type << uni << faculty << visib;
     return Audience(num, floor, type, uni, faculty, visib);
-}
+}*/
 
 int main()
 {
     //at start get functions LOAD for AUDIENCES , STUDENTS , INDEXTABLE
-
-    ofstream outFile("audience.txt");
+    
+    AddNewAudience();
+    
+    
+    
+    /*ofstream outFile("audience.txt");
     Audience aud1;
     aud1.creteObj();
     aud1.writeToFile(outFile);
-   // cout << " >>>ADDRESS : " << &aud1 << endl;
     indexTable obj1(aud1.getNumber(), &aud1);
-    //cout << " >>>ADDRESS : " << &aud1 << endl;
-   // cout << " INDEXTABLE ADDRESS: " << obj1.getAudienceLink() << endl;
 
     Audience aud2;
     aud2.creteObj();
     aud2.writeToFile(outFile);
-   // cout << " >>>ADDRESS : " << &aud2 << endl;
     indexTable obj2(aud2.getNumber(), &aud2);
-   // cout << " INDEXTABLE ADDRESS: " << obj2.getAudienceLink() << endl;
+
     Audience aud3;
     aud3.creteObj();
     aud3.writeToFile(outFile);
     indexTable obj3(aud3.getNumber(), &aud3);
-    outFile.close();
+    outFile.close();*/
 
-    ifstream inFile("audience.txt");
-    Audience raud1;
-    raud1 = readFromFile(inFile);
-    raud1.showObject();
+    /*ifstream inFile("audience.txt");
+    Audience aud1;
+    aud1 = readFromFile(inFile);
+   // aud1.showObject();
+    Audience aud2;
+    aud2 = readFromFile(inFile);
+    Audience aud3;
+    aud3 = readFromFile(inFile);
     inFile.close();
-    indexTable robj1(raud1.getNumber(), &raud1);
-  //  cout << " >>>ADDRESS : " << &aud3 << endl;
-    
- //   cout << " INDEXTABLE ADDRESS: " << obj3.getAudienceLink() << endl;
 
-    /*/indexNode* head = new indexNode;
-    head->printNode();
-
-    head->AddNewNodeToList(&head, obj1);
-    head->AddNewNodeToList(&head, obj2);
-    head->AddNewNodeToList(&head, obj3);
-
-    head->printNode();*/
-    
+    indexTable obj1(aud1.getNumber(), &aud1);
+    indexTable obj2(aud2.getNumber(), &aud2);
+    indexTable obj3(aud3.getNumber(), &aud3);
+  
     indexTableList Table;
     Table.addNewItem(obj1);
     Table.addNewItem(obj2);
     Table.addNewItem(obj3);
-    Table.addNewItem(robj1);
-    Table.showAllList();
-   
+    Table.showAllList();*/
+    
+    
+    
+    
+    /*
     //print
     aud1.showObject();
     aud2.showObject();
@@ -79,14 +78,13 @@ int main()
     //Students
     Student stud1;
     stud1.createObj();
+
     //the function below returns the address of the audience (master record)
     Audience* found = Table.findStudentAudience(stud1);
     cout << " Address: " << found << endl;
 
     Audience decoded = *found;
-    //make print method for single object
     cout << "OBJECT: ";
-    // CHECK WHY THE UNIVERSITY FACULTY AND TYPE IS NOT SHOWN
     decoded.showObject();
 
     StudentList List = decoded.getStudentSubList();
@@ -95,7 +93,7 @@ int main()
     List.showList();
 
     cout << " OBJECT CHANGED" << endl;
-    decoded.showObject();
+    decoded.showObject();*/
 
     cout << "Hello World!\n";
 }

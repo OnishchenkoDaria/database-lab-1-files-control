@@ -48,11 +48,15 @@ public:
 		this->Visibility = true;
 	}
 	
-	void writeToFile(ofstream& file) {
-		file << this->getNumber() << " " << this->getFloor() << " " << this->getType() 
-			<< " " << this->getUniversity() << " " << this->getFaculty() << " " << this->getVisibility() 
-			/* << " " << this->getStudentSubList().getHeadLink()*/ << endl;
-	}
+	/*void writeToFile(ofstream& file) {
+		file << this->getNumber() << " " 
+			 << this->getFloor() << " " 
+			 << this->getType() << " "
+			 << this->getUniversity() << " " 
+			 << this->getFaculty() << " " 
+			 << this->getVisibility() << endl;
+			/* << " " << this->getStudentSubList().getHeadLink()*/ 
+	//}*/
 
 	bool getVisibility() {
 		return this->Visibility;

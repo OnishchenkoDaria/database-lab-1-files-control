@@ -25,6 +25,8 @@ public:
 		cout << "Item: ID " << this->item.getAudienceNumber() << " LINK " << this->item.getAudienceLink() << " || Next: " << this->Next << endl;
 	}
 
+
+
 	/*void AddNewNodeToList(indexNode** head, const indexTable& obj) {
 		indexNode* temp = new indexNode(obj);
 		temp->Next = NULL;
