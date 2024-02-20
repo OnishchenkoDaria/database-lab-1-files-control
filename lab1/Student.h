@@ -3,7 +3,7 @@
 #include <string>
 
 using namespace std;
-class Student
+struct Student
 {
 private:
 	int StudentId{};

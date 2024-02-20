@@ -1,7 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
-class Functions
+
+struct Functions
 {
 public:
 

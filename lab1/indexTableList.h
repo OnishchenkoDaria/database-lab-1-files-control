@@ -4,7 +4,7 @@
 #include "indexNode.h"
 
 using namespace std;
-class indexTableList
+struct indexTableList
 {
 private:
 	indexNode* head;

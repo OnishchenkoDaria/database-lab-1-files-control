@@ -5,7 +5,7 @@
 #include <string>
 
 using namespace std;
-class indexTable
+struct indexTable
 {
 private:
 	int AudienceNumber;

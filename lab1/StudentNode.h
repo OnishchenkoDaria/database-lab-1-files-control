@@ -2,7 +2,7 @@
 #include "Student.h"
 
 using namespace std;
-class StudentNode
+struct StudentNode
 {
 private:
 	//int id, string name, string birthdate, char gender, string group, int 

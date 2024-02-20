@@ -9,33 +9,72 @@
 #include "indexTableList.h"
 using namespace std;
 
+Audience readFromFile(ifstream& file) {
+    int num, floor;
+    string type, uni, faculty;
+    bool visib;
+    //StudentList* list;
+    file >> num >> floor >> type >> uni >> faculty >> visib;
+    cout << num << floor << type << uni << faculty << visib;
+    return Audience(num, floor, type, uni, faculty, visib);
+}
+
 int main()
 {
+    //at start get functions LOAD for AUDIENCES , STUDENTS , INDEXTABLE
+
+    ofstream outFile("audience.txt");
     Audience aud1;
-    cout << " >>>ADDRESS : " << &aud1 << endl;
+    aud1.creteObj();
+    aud1.writeToFile(outFile);
+   // cout << " >>>ADDRESS : " << &aud1 << endl;
     indexTable obj1(aud1.getNumber(), &aud1);
-    cout << " >>>ADDRESS : " << &aud1 << endl;
-    cout << " INDEXTABLE ADDRESS: " << obj1.getAudienceLink() << endl;
+    //cout << " >>>ADDRESS : " << &aud1 << endl;
+   // cout << " INDEXTABLE ADDRESS: " << obj1.getAudienceLink() << endl;
 
     Audience aud2;
-    cout << " >>>ADDRESS : " << &aud2 << endl;
+    aud2.creteObj();
+    aud2.writeToFile(outFile);
+   // cout << " >>>ADDRESS : " << &aud2 << endl;
     indexTable obj2(aud2.getNumber(), &aud2);
-    cout << " INDEXTABLE ADDRESS: " << obj2.getAudienceLink() << endl;
+   // cout << " INDEXTABLE ADDRESS: " << obj2.getAudienceLink() << endl;
     Audience aud3;
-    cout << " >>>ADDRESS : " << &aud3 << endl;
+    aud3.creteObj();
+    aud3.writeToFile(outFile);
     indexTable obj3(aud3.getNumber(), &aud3);
-    cout << " INDEXTABLE ADDRESS: " << obj3.getAudienceLink() << endl;
+    outFile.close();
+
+    ifstream inFile("audience.txt");
+    Audience raud1;
+    raud1 = readFromFile(inFile);
+    raud1.showObject();
+    inFile.close();
+    indexTable robj1(raud1.getNumber(), &raud1);
+  //  cout << " >>>ADDRESS : " << &aud3 << endl;
+    
+ //   cout << " INDEXTABLE ADDRESS: " << obj3.getAudienceLink() << endl;
+
+    /*/indexNode* head = new indexNode;
+    head->printNode();
+
+    head->AddNewNodeToList(&head, obj1);
+    head->AddNewNodeToList(&head, obj2);
+    head->AddNewNodeToList(&head, obj3);
+
+    head->printNode();*/
     
     indexTableList Table;
     Table.addNewItem(obj1);
     Table.addNewItem(obj2);
     Table.addNewItem(obj3);
+    Table.addNewItem(robj1);
     Table.showAllList();
    
     //print
     aud1.showObject();
     aud2.showObject();
     aud3.showObject();
+    raud1.showObject();
 
     //Students
     Student stud1;
@@ -50,8 +89,6 @@ int main()
     // CHECK WHY THE UNIVERSITY FACULTY AND TYPE IS NOT SHOWN
     decoded.showObject();
 
-    //somewhere after here the constructor is summoned!!!!!
-
     StudentList List = decoded.getStudentSubList();
     List.AddItemStudentList(stud1);
     decoded.setStudentSubList(List);
@@ -61,18 +98,6 @@ int main()
     decoded.showObject();
 
     cout << "Hello World!\n";
-
-    /*indexTable Table;
-    indexTable* head = new indexTable;
-    indexTable* tail = new indexTable;
-    head = tail = NULL;
-    Table.printTable(head);
-    Audience aud;
-    Audience aud1;
-    Table.addNewItem(aud, &head, &tail);
-    Table.addNewItem(aud1, &head, &tail);
-    Table.printTable(head);*/
-   
 }
 
 // Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"

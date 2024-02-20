@@ -5,7 +5,7 @@
 #include <string>
 
 using namespace std;
-class StudentList
+struct StudentList
 {
 private:
 	StudentNode* head;

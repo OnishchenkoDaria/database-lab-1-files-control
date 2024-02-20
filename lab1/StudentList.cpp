@@ -1,4 +1,5 @@
 #include "StudentList.h"
+#include <fstream>
 
 StudentNode* StudentList::getHeadLink() {
 	return this->head;
@@ -8,6 +9,7 @@ void StudentList::AddItemStudentList(const Student& stud) {
 	StudentNode* temp = new StudentNode(stud);
 	temp->setNextStudent(head);
 	head = temp;
+
 	//add if head == NULL ---> audiense set students (head)
 }
 
