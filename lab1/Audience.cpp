@@ -49,11 +49,11 @@ void Audience::changeVisibility() {
 	}
 }
 
-void Audience::setStudentSubList(StudentList head) {
+void Audience::setStudentSubList(streampos head) {
 	this->Students = head;
 }
 
-StudentList Audience::getStudentSubList() {
+streampos Audience::getStudentSubList() {
 	return this->Students;
 }
 
@@ -64,5 +64,5 @@ void Audience::showObject() {
 		<< " University: " << this->getUniversity()
 		<< " Faculty: " << this->getFaculty()
 		<< " Visibility: " << this->Visibility
-		<< " List LINK: " << this->getStudentSubList().getHeadLink() << endl;
+		<< " List LINK: " << this->getStudentSubList() << endl;
 }

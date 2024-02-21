@@ -15,7 +15,7 @@ private:
 	string University;
 	string Faculty;
 	bool Visibility{};
-	StudentList Students;
+	streampos Students;
 
 public:
 	//methods
@@ -24,13 +24,13 @@ public:
 		this->Visibility = true;
 	}
 
-	Audience(int num, int floor, string type, string uni, string faculty, bool visib /*StudentList list*/) {
+	Audience(int num, int floor, string type, string uni, string faculty, bool visib, streampos pos) {
 		this->setNumber(num);
 		this->setFloor(floor);
 		this->setType(type);
 		this->setUniversity(uni);
 		this->setFaculty(faculty);
-		//this->setStudentSubList(list);
+		this->setStudentSubList(pos);
 		this->Visibility = visib;
 	}
 
@@ -46,18 +46,9 @@ public:
 		cout << "Insert AUDIENCE location Faculty:   ";
 		cin >> this->Faculty;
 		this->Visibility = true;
+		this->Students = -1;
 	}
 	
-	/*void writeToFile(ofstream& file) {
-		file << this->getNumber() << " " 
-			 << this->getFloor() << " " 
-			 << this->getType() << " "
-			 << this->getUniversity() << " " 
-			 << this->getFaculty() << " " 
-			 << this->getVisibility() << endl;
-			/* << " " << this->getStudentSubList().getHeadLink()*/ 
-	//}*/
-
 	bool getVisibility() {
 		return this->Visibility;
 	}
@@ -84,9 +75,9 @@ public:
 
 	void changeVisibility();
 
-	void setStudentSubList(StudentList head);
+	void setStudentSubList(streampos head);
 
-	StudentList getStudentSubList();
+	streampos getStudentSubList();
 
 	void showObject();
 };

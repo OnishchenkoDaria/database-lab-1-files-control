@@ -8,13 +8,14 @@ void indexTableList::addNewItem(const indexTable& aud){
 
 void indexTableList::showAllList() {
 	indexNode* temp = head;
+	
 	while (temp != NULL) {
 		cout << "Key (AUDIENCE NUMBER): " << temp->getItemData().getAudienceNumber() << "   Address: " << temp->getItemData().getAudienceLink() << endl;
 		temp = temp->getNext();
 	}
 }
 
-Audience* indexTableList::findStudentAudience(Student stud) {
+streampos indexTableList::findStudentAudience(Student stud) {
 	int AudNumber = stud.getAudience();
 	indexNode* temp = head;
 	while (temp != NULL) {

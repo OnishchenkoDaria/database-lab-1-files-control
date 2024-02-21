@@ -9,20 +9,20 @@ struct indexTable
 {
 private:
 	int AudienceNumber;
-	Audience* AudienceLink;
+	streampos position;
 	//indexTable* Next;
 public:
 	//methods
 
 	indexTable() {
 		this->AudienceNumber = 0;
-		this->AudienceLink = NULL;
+		this->position = NULL;
 		//this->Next = NULL;
 	}
 
-	indexTable(int num, Audience* address){
+	indexTable(int num, streampos address){
 		this->AudienceNumber = num;
-		this->AudienceLink = address;
+		this->position = address;
 	}
 	//indexTable* head = new indexTable;
 	//indexTable* tail = new indexTable;
@@ -31,12 +31,12 @@ public:
 
 	int getAudienceNumber();
 
-	void setAudienceLink(Audience &aud) {
-		this->AudienceLink = &aud;
+	void setAudienceLink(streampos pos) {
+		this->position = pos;
 	}
 
-	Audience* getAudienceLink() {
-		return this->AudienceLink;
+	streampos getAudienceLink() {
+		return this->position;
 	}
 
 	void showObj() {
