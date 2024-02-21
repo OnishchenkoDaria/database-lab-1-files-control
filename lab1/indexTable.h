@@ -16,7 +16,7 @@ public:
 
 	indexTable() {
 		this->AudienceNumber = 0;
-		this->position = NULL;
+		this->position = -1;
 		//this->Next = NULL;
 	}
 

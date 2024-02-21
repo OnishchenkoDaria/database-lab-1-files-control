@@ -8,10 +8,10 @@ Student StudentNode::getStudentData() {
 	return this->item;
 }
 
-void StudentNode::setNextStudent(StudentNode* stud) {
+void StudentNode::setNextStudent(streampos stud) {
 	this->Next = stud;
 }
 
-StudentNode* StudentNode::getNextStudent() {
+streampos StudentNode::getNextStudent() {
 	return this->Next;
 }

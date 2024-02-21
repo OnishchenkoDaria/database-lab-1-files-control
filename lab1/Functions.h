@@ -16,14 +16,14 @@ indexTableList Table;
 /// THE ADD NEW MASTER --- START
 
 Audience readAudFromFile(ifstream& file) {
-    int num, floor, position;
+    int num, floor, position, count;
     string type, uni, faculty;
     bool visib;
     //StudentList* list;
-    file >> num >> floor >> type >> uni >> faculty >> visib >> position;
+    file >> num >> floor >> type >> uni >> faculty >> visib >> position >> count;
 	streampos pos = position;
 	cout << " num: " << num << " floor: " << floor << " type: " << type << " uni: " << uni << " fac: " << faculty << " vis: " << visib << " pos: " << pos<< endl;
-	return Audience(num, floor, type, uni, faculty, visib, pos);
+	return Audience(num, floor, type, uni, faculty, visib, pos, count);
 }
 
 indexTable readIndexFromFile(ifstream& file) {
@@ -39,12 +39,12 @@ indexTable readIndexFromFile(ifstream& file) {
 			return indexTable(num, Adrs);
 		}
 		else {
-			cout << "Invalid text found" << endl;
+			cout << "Invalid text found in index file" << endl;
 			return indexTable();
 		}
 	}
 	else {
-		cout << "Failed to read the line" << endl;
+		cout << "Failed to read the line in index file" << endl;
 		return indexTable();
 	}
 }
@@ -53,7 +53,7 @@ void readAllIndexTable() {
 	ifstream inFile("index.txt");
 	
 	if (!inFile) {
-		cout << "Error opening audience file!" << endl;
+		cout << "Error opening index file!" << endl;
 		return;
 	}
 	
@@ -61,7 +61,7 @@ void readAllIndexTable() {
 	while (!inFile.eof()) {
 		indexTable indx = readIndexFromFile(inFile);
 		//indx.showObj();
-		if ((indx.getAudienceLink() != NULL) or indx.getAudienceNumber() != 0) {
+		if ((indx.getAudienceLink() != -1) or (indx.getAudienceNumber() != 0)) {
 			Table.addNewItem(indx);
 		}
 	}
@@ -84,26 +84,33 @@ streampos writeAudienceToFile(Audience obj) {
 		<< obj.getUniversity() << " "
 		<< obj.getFaculty() << " "
 		<< obj.getVisibility() << " "
-		<< obj.getStudentSubList() << endl;
+		<< obj.getStudentSubList()<< " "
+		<< obj.getStudentCount() << endl;
 	
 	//outFile.close();
 	return startPos;
 }
 
-void writeStudentToFile(Student obj) {
+streampos writeStudentToFile(StudentNode obj) {
 	ofstream outFile("students.txt", ios::app);
 
 	if (!outFile) {
 		cout << "Error opening students file!" << endl;
-		return;
+		return -1;
 	}
-	outFile << obj.getId() << " "
-		<< obj.getName() << " "
-		<< obj.getDate() << " "
-		<< obj.getGender() << " "
-		<< obj.getGroup() << " "
-		<< obj.getAudience() << " "
-		<< obj.getVisibility() << endl;
+	outFile << " ";
+	streampos startPos = outFile.tellp();
+	cout << "POSITION IN STUDENT FILE: " << startPos << endl;
+	outFile << obj.getStudentData().getId() << " "
+		<< obj.getStudentData().getName() << " "
+		<< obj.getStudentData().getDate() << " "
+		<< obj.getStudentData().getGender() << " "
+		<< obj.getStudentData().getGroup() << " "
+		<< obj.getStudentData().getAudience() << " "
+		<< obj.getStudentData().getVisibility() << " "
+		<< obj.getNextStudent() << endl;
+
+	return startPos;
 	//outFile.close();
 }
 
@@ -163,17 +170,17 @@ void findTheAudience() {
 
 Audience createAudfromLine(string line) {
 	istringstream iss(line);
-	int num, floor, position;
+	int num, floor, position, count;
 	string type, uni, facult;
 	bool visib;
 	streampos studLink;
-	if (iss >> num >> floor >> type >> uni >> facult >> visib >> position) {
-		cout << "AUDIENCE READ:  num " << num << " floor " << floor 
-			 << " type: " << type << " uni " << uni 
-			 << " facult " << facult << " vis " << visib 
-			 << " stud link: " << position << endl;
+	if (iss >> num >> floor >> type >> uni >> facult >> visib >> position >> count) {
+		cout << "AUDIENCE READ:  num " << num << " floor " << floor
+			<< " type: " << type << " uni " << uni
+			<< " facult " << facult << " vis " << visib
+			<< " stud link: " << position << " stud count: " << count << endl;
 		studLink = position;
-		return Audience(num, floor, type, uni, facult, visib, studLink);
+		return Audience(num, floor, type, uni, facult, visib, studLink, count);
 	}
 	else {
 		cout << "Invalid text found" << endl;
@@ -181,6 +188,80 @@ Audience createAudfromLine(string line) {
 	}
 }
 
+/*void replaceTheLineiInFile(streampos position, const string& newString, const string& oldline) {
+	//ifstream inFile("audience.txt");
+	//ofstream outFile("temp.txt", ios::app);
+	fstream file("audience.txt", ios::in | ios::out);
+	if (!file.is_open()) {
+		cerr << "Error: Failed to open audience file." << std::endl;
+		return;
+	}
+	file.seekg(position);
+	string line;
+	while (getline(file, line))
+	{
+		line.replace(line.find(oldline), oldline.length(), "");
+		file << line << endl;
+
+	}
+
+	file.seekg(position);
+	file << newString;
+
+	//check
+	cout << "check after replacement: ";
+	file.seekg(position);
+	string line1;
+	getline(file, line1);
+	cout << line1 << endl;
+
+	file.close();
+}*/
+
+void replaceTheLineiInFile(streampos position, const string& newString) {
+	//ifstream inFile("audience.txt");
+	//ofstream outFile("temp.txt", ios::app);
+	fstream file("audience.txt", ios::in | ios::out);
+	if (!file.is_open()) {
+		cerr << "Error: Failed to open audience file." << std::endl;
+		return;
+	}
+	file.seekg(position);
+	string line;
+	getline(file, line);
+	const char* charrArr = line.c_str();
+
+	int pos = position;
+	for (int i = 0; i < line.size(); i++) {
+		file.seekg(pos + i);
+		file.put(' ');
+	}
+
+	file.seekg(position);
+	file << newString;
+
+	//check
+	cout << "check after replacement: ";
+	file.seekg(position);
+	string line1;
+	getline(file, line1);
+	cout << line1 << endl;
+
+	file.close();
+}
+
+StudentNode createNode(Student stud, Audience foundAud) {
+	if (foundAud.getStudentSubList() == -1) {
+		return StudentNode(stud);
+		//update the student attribute in audience master file
+	}
+	else {
+		return StudentNode(stud, foundAud.getStudentSubList());
+	}
+}
+
+
+// insert-s
 void AddNewStudent() {
 	Student stud;
 	stud.createObj();
@@ -189,18 +270,17 @@ void AddNewStudent() {
 	streampos found = Table.findStudentAudience(stud);
 	string line = readLineFromPosition(found);
 	Audience foundAud = createAudfromLine(line);
-	if (foundAud.getStudentSubList() == -1) {
-		StudentList List;
-		List.AddItemStudentList(stud);
-		//update the student attribute in audience master file
-	}
-	else {
-
-	}
-	writeStudentToFile(stud);
-
-	/*
-	StudentList List = decoded.getStudentSubList();
-	List.AddItemStudentList(stud);
-	decoded.setStudentSubList(List);*/
+	foundAud.showObject();
+	StudentNode head = createNode(stud, foundAud);
+	head.showObj();
+	streampos NewStudentsHeadPos = writeStudentToFile(head);
+	int prevCount = foundAud.getStudentCount();
+	cout << "prevCount: " << prevCount << endl;
+	foundAud.setStudentCount(prevCount + 1);
+	cout << "newCount: " << foundAud.getStudentCount() << endl;
+	foundAud.setStudentSubList(NewStudentsHeadPos);
+	cout << "newStudentSubList: " << foundAud.getStudentSubList() << endl;
+	string replacement = foundAud.TransformObjDataToLine();
+	cout << "REPLACEMENT: " << replacement << endl;
+	replaceTheLineiInFile(found, replacement);
 }

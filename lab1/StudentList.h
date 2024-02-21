@@ -17,7 +17,7 @@ public:
 
 	StudentNode* getHeadLink();
 
-	void AddItemStudentList(const Student &stud);
+	//void AddItemStudentList(const Student &stud);
 
-	void showList();
+	//void showList();
 };

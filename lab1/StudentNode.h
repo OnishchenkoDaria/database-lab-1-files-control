@@ -7,20 +7,30 @@ struct StudentNode
 private:
 	//int id, string name, string birthdate, char gender, string group, int 
 	Student item;
-	StudentNode* Next;
+	streampos Next;
 public:
 	//methods
 
 	StudentNode(const Student& obj) {
 		this->item = obj;
-		this->Next = NULL;
+		this->Next = -1;
 	}
 
+	StudentNode(const Student& obj, streampos next) {
+		this->item = obj;
+		this->Next = next;
+	}
+
+	void showObj() {
+		this->item.showObject();
+		cout << " NEXT NODE: " << this->getNextStudent() << endl;
+	}
+	
 	void setStudentData(Student stud);
 
 	Student getStudentData();
 
-	void setNextStudent(StudentNode* stud);
+	void setNextStudent(streampos stud);
 
-	StudentNode* getNextStudent();
+	streampos getNextStudent();
 };

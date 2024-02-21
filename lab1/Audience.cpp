@@ -63,6 +63,7 @@ void Audience::showObject() {
 		<< " Type: " << this->getType()
 		<< " University: " << this->getUniversity()
 		<< " Faculty: " << this->getFaculty()
-		<< " Visibility: " << this->Visibility
-		<< " List LINK: " << this->getStudentSubList() << endl;
+		<< " Visibility: " << this->getVisibility()
+		<< " List LINK: " << this->getStudentSubList()
+		<< " StudCount: " << this->getStudentCount() << endl;
 }

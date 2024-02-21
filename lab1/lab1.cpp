@@ -28,15 +28,15 @@ int main()
     //AddNewStudent();
     readAllIndexTable();
 
-    AddNewAudience();
-    AddNewAudience();
+    /*AddNewAudience();
+    AddNewAudience();*/
     
     //readAllIndexTable();
     
     findTheAudience();
     findTheAudience();
 
-    //AddNewStudent();
+    AddNewStudent();
     
     
     
