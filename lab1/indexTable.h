@@ -39,6 +39,10 @@ public:
 		return this->AudienceLink;
 	}
 
+	void showObj() {
+		cout << "OBJECT >> num: " << this->getAudienceNumber() << " address: " << this->getAudienceLink() << endl;
+	}
+
 	//ÏÐÀÖÞÞ×² ÌÅÒÎÄÈ ÍÈÆ×Å 
 	
 	//void addNewItem(Audience aud, indexTable** head, indexTable** tail);
@@ -47,4 +51,3 @@ public:
 
 	//void printTable(indexTable* head);
 };
-

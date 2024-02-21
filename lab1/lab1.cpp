@@ -23,10 +23,11 @@ using namespace std;
 int main()
 {
     //at start get functions LOAD for AUDIENCES , STUDENTS , INDEXTABLE
+    readAllIndexTable();
+    
+    AddNewStudent();
     
     AddNewAudience();
-    
-    
     
     /*ofstream outFile("audience.txt");
     Audience aud1;

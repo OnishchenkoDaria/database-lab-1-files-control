@@ -7,7 +7,7 @@ struct Student
 {
 private:
 	int StudentId{};
-	string FullName;
+	string Name;
 	string BirthDate{};
 	char Gender{};
 	string GroupName;
@@ -56,6 +56,8 @@ public:
 	int getAudience();
 
 	void changeVisibility();
+
+	bool getVisibility();
 
 	void showObject();
 

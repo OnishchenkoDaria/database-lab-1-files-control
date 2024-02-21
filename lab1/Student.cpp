@@ -9,11 +9,11 @@ int Student::getId() {
 }
 
 void Student::setName(string name) {
-	this->FullName = name;
+	this->Name = name;
 }
 
 string Student::getName() {
-	return this->FullName;
+	return this->Name;
 }
 
 void Student::setDate(string date){
@@ -57,11 +57,15 @@ void Student::changeVisibility() {
 	}
 }
 
+bool Student::getVisibility() {
+	return this->Visibility;
+}
+
 void Student::createObj() {
 	cout << "Insert STUDENT'S id card number:  ";
 	cin >> this->StudentId;
-	cout << "Insert STUDENT'S Fullname:  ";
-	cin >> this->FullName;
+	cout << "Insert STUDENT'S Name:  ";
+	cin >> this->Name;
 	cout << "Insert STUDENT'S birth date:  ";
 	cin >> this->BirthDate;
 	cout << "Insert STUDENT'S gender:  ";
