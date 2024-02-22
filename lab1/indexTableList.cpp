@@ -19,9 +19,7 @@ void indexTableList::showAllList() {
 	}
 }
 
-void indexTableList::ShowAllMasterFiles() {
-	
-}
+
 
 streampos indexTableList::findStudentAudience(Student stud) {
 	int AudNumber = stud.getAudience();

@@ -22,8 +22,6 @@ public:
 
 	streampos findStudentAudience(Student stud);
 
-	void ShowAllMasterFiles();
-
 	streampos findById(int id){
 		indexNode* temp = head;
 		while (temp) {

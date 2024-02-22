@@ -10,8 +10,8 @@
 #include <sstream>
 
 indexTableList Table;
-const int MAXrecordsSIZE = 20;
-int MasterArr[MAXrecordsSIZE], SlaveArr[MAXrecordsSIZE];
+//const int MAXrecordsSIZE = 20;
+//int MasterArr[MAXrecordsSIZE], SlaveArr[MAXrecordsSIZE];
 
 /// THE ADD NEW MASTER --- START
 
@@ -52,7 +52,7 @@ string readLineFromPosition(streampos startPos, string fileName) {
 
 	string line;
 	inFile.seekg(startPos);
-	// get to the positiion in file
+	// get to the position in file
 	getline(inFile, line); // read the line from the position
 	//cout << line << endl;
 	return line;
@@ -251,9 +251,8 @@ Audience findTheAudience() {
 	int id = AskForId();
 	streampos pos = Table.findById(id);
 	string line = readLineFromPosition(pos, "audience.txt");
-	//cout << "Line from position " << pos << endl;
+	
 	return createAudfromLine(line);
-	//cout << " " << line << endl;
 }
 
 StudentNode readStudentFromFile(int inputId, streampos position) {
@@ -276,7 +275,6 @@ StudentNode readStudentFromFile(int inputId, streampos position) {
 			cout << "No Student with such Id found!" << endl;
 		}
 	}
-	
 }
 
 StudentNode findTheStudent() {
