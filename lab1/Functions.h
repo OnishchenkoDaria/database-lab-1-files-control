@@ -299,6 +299,11 @@ Audience getAudience() {
 	return findTheAudience(AskForId());
 }
 
+void deleteMaster() {
+	Audience aud = getAudience();
+	aud.changeVisibility();
+}
+
 StudentNode findStudentFromFile(int inputId, streampos position) {
 	ifstream inFile("students.txt");
 
