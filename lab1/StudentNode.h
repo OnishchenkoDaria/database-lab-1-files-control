@@ -11,6 +11,11 @@ private:
 public:
 	//methods
 
+	StudentNode() {
+		this->Next = -1;
+		this->getStudentData().setId(-1);
+	}
+
 	StudentNode(const Student& obj) {
 		this->item = obj;
 		this->Next = -1;
@@ -24,6 +29,15 @@ public:
 	void showObj() {
 		this->item.showObject();
 		cout << " NEXT NODE: " << this->getNextStudent() << endl;
+	}
+
+	void userData() {
+		cout << " Student Id: " << this->getStudentData().getId() << " | "
+			<< " Name: " << this->getStudentData().getName() << " | "
+			<< " BirthDate: " << this->getStudentData().getDate() << " | "
+			<< " Gender: " << this->getStudentData().getGender() << " | "
+			<< " Group: " << this->getStudentData().getGroup() << " | "
+			<< " Audience: " << this->getStudentData().getAudience() << endl;
 	}
 	
 	void setStudentData(Student stud);

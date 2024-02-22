@@ -14,15 +14,15 @@ public:
 		head = NULL;
 	}
 
-	//переписати функцію з indextable під цей клас
-	//тобто функції, що приймали на вхід голову тепер мають бути переписан як методи цього класу
-	//зокремо методи void indexTable::addNewItem , void indexTable::printTable , 
+	indexNode* getHead();
 
 	void addNewItem(const indexTable& aud);
 
 	void showAllList();
 
 	streampos findStudentAudience(Student stud);
+
+	void ShowAllMasterFiles();
 
 	streampos findById(int id){
 		indexNode* temp = head;

@@ -6,6 +6,10 @@ void indexTableList::addNewItem(const indexTable& aud){
 	head = temp;
 }
 
+indexNode* indexTableList::getHead() {
+	return this->head;
+}
+
 void indexTableList::showAllList() {
 	indexNode* temp = head;
 	
@@ -13,6 +17,10 @@ void indexTableList::showAllList() {
 		cout << "Key (AUDIENCE NUMBER): " << temp->getItemData().getAudienceNumber() << "   Address: " << temp->getItemData().getAudienceLink() << endl;
 		temp = temp->getNext();
 	}
+}
+
+void indexTableList::ShowAllMasterFiles() {
+	
 }
 
 streampos indexTableList::findStudentAudience(Student stud) {

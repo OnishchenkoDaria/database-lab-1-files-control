@@ -61,6 +61,10 @@ bool Student::getVisibility() {
 	return this->Visibility;
 }
 
+void Student::setVisibility(bool visib) {
+	this->Visibility = visib;
+}
+
 void Student::createObj() {
 	cout << "Insert STUDENT'S id card number:  ";
 	cin >> this->StudentId;
@@ -78,11 +82,11 @@ void Student::createObj() {
 }
 
 void Student::showObject() {
-	cout << " ID: " << this->getId()
-		<< " Name: " << this->getName()
-		<< " Birth Date: " << this->getDate()
-		<< " Gender: " << this->getGender()
-		<< " Group: " << this->getGroup()
-		<< " Audience: " << this->getAudience()
-		<< " Visibility: " << this->Visibility << endl;
+	cout << endl << " ID: " << this->getId() << " | "
+		<< " Name: " << this->getName() << " | "
+		<< " Birth Date: " << this->getDate() << " | "
+		<< " Gender: " << this->getGender() << " | "
+		<< " Group: " << this->getGroup() << " | "
+		<< " Audience: " << this->getAudience() << " | "
+		<< " Visibility: " << this->Visibility << endl << endl;
 }

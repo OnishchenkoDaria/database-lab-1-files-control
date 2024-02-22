@@ -31,6 +31,16 @@ public:
 		this->Visibility = true;
 	}
 
+	Student(int id, string name, string birthdate, char gender, string group, int aud, bool visib) {
+		this->setId(id);
+		this->setName(name);
+		this->setDate(birthdate);
+		this->setGender(gender);
+		this->setGroup(group);
+		this->setAudience(aud);
+		this->setVisibility(visib);
+	}
+
 	void setId(int id);
 
 	int getId();
@@ -56,6 +66,8 @@ public:
 	int getAudience();
 
 	void changeVisibility();
+
+	void setVisibility(bool visib);
 
 	bool getVisibility();
 

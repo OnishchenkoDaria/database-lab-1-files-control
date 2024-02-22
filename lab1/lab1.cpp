@@ -23,19 +23,22 @@ using namespace std;
 int main()
 {
     //at start get functions LOAD for AUDIENCES , STUDENTS , INDEXTABLE
-    
-    
-    //AddNewStudent();
+    //preloading
     readAllIndexTable();
+    //ut-m
+    showMasterFile();
 
+    //insert-m
     /*AddNewAudience();
     AddNewAudience();*/
-    
-    //readAllIndexTable();
-    
-    findTheAudience();
-    findTheAudience();
 
+    //get-s
+    findTheStudent();
+    //get-m
+    findTheAudience();
+    findTheAudience();
+    
+    //insert-s
     AddNewStudent();
     
     
