@@ -20,7 +20,7 @@ public:
 
 	void showAllList();
 
-	streampos findStudentAudience(Student stud);
+	streampos findStudentAudience(int AudNumber);
 
 	streampos findById(int id){
 		indexNode* temp = head;

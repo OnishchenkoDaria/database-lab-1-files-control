@@ -25,18 +25,26 @@ int main()
     //at start get functions LOAD for AUDIENCES , STUDENTS , INDEXTABLE
     //preloading
     readAllIndexTable();
+    
     //ut-m
     showMasterFile();
+
+    //ut-s
+    showSlave();
 
     //insert-m
     /*AddNewAudience();
     AddNewAudience();*/
+    //get-m
 
     //get-s
     findTheStudent();
-    //get-m
-    findTheAudience();
-    findTheAudience();
+
+    Audience aud = getAudience();
+    EditAudience(aud);
+    
+    
+    //findTheAudience();
     
     //insert-s
     AddNewStudent();

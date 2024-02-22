@@ -21,8 +21,8 @@ void indexTableList::showAllList() {
 
 
 
-streampos indexTableList::findStudentAudience(Student stud) {
-	int AudNumber = stud.getAudience();
+streampos indexTableList::findStudentAudience(int AudNumber) {
+	//int AudNumber = stud.getAudience();
 	indexNode* temp = head;
 	while (temp != NULL) {
 		if (temp->getItemData().getAudienceNumber() == AudNumber) {

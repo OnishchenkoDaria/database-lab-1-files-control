@@ -1,5 +1,6 @@
 #pragma once
 #include "Student.h"
+#include <sstream>
 
 using namespace std;
 struct StudentNode
@@ -38,6 +39,21 @@ public:
 			<< " Gender: " << this->getStudentData().getGender() << " | "
 			<< " Group: " << this->getStudentData().getGroup() << " | "
 			<< " Audience: " << this->getStudentData().getAudience() << endl;
+	}
+
+	string TransformObjDataToLine() {
+		ostringstream oss;
+
+		oss << this->getStudentData().getId()
+			<< " " << this->getStudentData().getName()
+			<< " " << this->getStudentData().getDate()
+			<< " " << this->getStudentData().getGender()
+			<< " " << this->getStudentData().getGroup()
+			<< " " << this->getStudentData().getAudience()
+			<< " " << this->getStudentData().getVisibility()
+			<< " " << this->getNextStudent();
+
+		return oss.str();
 	}
 	
 	void setStudentData(Student stud);

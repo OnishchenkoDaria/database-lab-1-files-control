@@ -97,6 +97,48 @@ void showMasterFile(){
 	cout << endl;
 }
 
+void readStudentFromFile(ifstream& file) {
+	string line;
+	if (getline(file, line)) {
+		istringstream iss(line);
+		int id, audience, position;
+		string name, date, group;
+		char gender;
+		bool visib;
+
+		if (iss >> id >> name >> date >> gender >> group >> audience >> visib >> position) {
+			cout << " Student Id: " << id << " | "
+				<< " Name: " << name << " | "
+				<< " Birth date: " << date << " | "
+				<< " Gender: " << gender << " | "
+				<< " Group: " << group << " | "
+				<< " Audience: " << audience << " | "
+				<< " Visibility: " << visib << " | "
+				<< " Next Student: " << position << endl;
+			return;
+		}
+		else {
+			cout << "Invalid text found in audiences file" << endl;
+			return;
+		}
+	}
+}
+
+void showSlave() {
+	ifstream inFile("students.txt");
+
+	if (!inFile) {
+		cout << "Error opening audience file!" << endl;
+		return;
+	}
+
+	cout << endl;
+	while (!inFile.eof()) {
+		readStudentFromFile(inFile);
+	}
+	cout << endl;
+}
+
 indexTable readIndexFromFile(ifstream& file) {
 	string line;
 	if (getline(file, line)) {
@@ -213,6 +255,12 @@ void AddNewAudience() {
 	}
 }
 /// THE ADD NEW MASTER --- FINISH
+int AskForId() {
+	int id;
+	cout << "Insert id: ";
+	cin >> id;
+	return id;
+}
 
 Audience createAudfromLine(string line) {
 	istringstream iss(line);
@@ -240,22 +288,18 @@ Audience createAudfromLine(string line) {
 	}
 }
 
-int AskForId() {
-	int id;
-	cout << "Insert id: ";
-	cin >> id;
-	return id;
-}
-
-Audience findTheAudience() {
-	int id = AskForId();
+Audience findTheAudience(int id) {
+	//int id = AskForId();
 	streampos pos = Table.findById(id);
 	string line = readLineFromPosition(pos, "audience.txt");
-	
 	return createAudfromLine(line);
 }
 
-StudentNode readStudentFromFile(int inputId, streampos position) {
+Audience getAudience() {
+	return findTheAudience(AskForId());
+}
+
+StudentNode findStudentFromFile(int inputId, streampos position) {
 	ifstream inFile("students.txt");
 
 	string line = readLineFromPosition(position, "students.txt");
@@ -269,7 +313,7 @@ StudentNode readStudentFromFile(int inputId, streampos position) {
 	else {
 		//cout << "next position: " << stud.getNextStudent() << endl;
 		if (stud.getNextStudent() != -1) {
-			readStudentFromFile(inputId, stud.getNextStudent());
+			findStudentFromFile(inputId, stud.getNextStudent());
 		}
 		else {
 			cout << "No Student with such Id found!" << endl;
@@ -279,10 +323,10 @@ StudentNode readStudentFromFile(int inputId, streampos position) {
 
 StudentNode findTheStudent() {
 	//use get-m
-	Audience foundMaster = findTheAudience();
+	Audience foundMaster = findTheAudience(AskForId());
 	int id = AskForId();
 	//cout << "pos: " << foundMaster.getStudentSubList() << endl;
-	return readStudentFromFile(id, foundMaster.getStudentSubList());
+	return findStudentFromFile(id, foundMaster.getStudentSubList());
 }
 
 int streamposToInt(std::streampos pos) {
@@ -331,13 +375,113 @@ StudentNode createNode(Student stud, Audience foundAud) {
 	}
 }
 
+void EditAudience(Audience& aud) {
+	char answer;
+	cout << "Press 'F' to change the floor data" << endl
+		<< "Press 'T' to change the type data" << endl
+		<< "Press 'U' to change the university data" << endl
+		<< "Press 'A' to change the faculty data" << endl;
+
+	int newFloor;
+	string newString;
+	streampos found;
+
+
+	cin >> answer;
+	switch (answer)
+	{
+	case 'F':
+		cout << "Input new value: "; cin >> newFloor;
+		aud.setFloor(newFloor);
+		newString = aud.TransformObjDataToLine();
+		found = Table.findStudentAudience(aud.getNumber());
+		replaceTheLineiInFile(found, newString);
+		break;
+	case 'T':
+		cout << "Input new value: "; cin >> newString;
+		aud.setType(newString);
+		newString = aud.TransformObjDataToLine();
+		found = Table.findStudentAudience(aud.getNumber());
+		replaceTheLineiInFile(found, newString);
+		break;
+	case 'U':
+		cout << "Input new value: "; cin >> newString;
+		aud.setType(newString);
+		newString = aud.TransformObjDataToLine();
+		found = Table.findStudentAudience(aud.getNumber());
+		replaceTheLineiInFile(found, newString);
+		break;
+	case 'A':
+		cout << "Input new value: "; cin >> newString;
+		aud.setType(newString);
+		newString = aud.TransformObjDataToLine();
+		found = Table.findStudentAudience(aud.getNumber());
+		replaceTheLineiInFile(found, newString);
+		break;
+	}
+}
+
+void EditStudent(StudentNode& stud) {
+	char answer;
+	cout << "Press 'N' to change the name data" << endl
+		<< "Press 'B' to change the birthday data" << endl
+		<< "Press 'G' to change the gender data" << endl
+		<< "Press 'J' to change the group data" << endl
+		<< "Press 'A' to change the audience data" << endl;
+
+	int newAudince;
+	string newString;
+	char newGender;
+	streampos found;
+
+
+	cin >> answer;
+	switch (answer)
+	{
+	case 'N':
+		cout << "Input new value: "; cin >> newString;
+		stud.getStudentData().setName(newString);
+		newString = stud.TransformObjDataToLine();
+		//
+		replaceTheLineiInFile(found, newString);
+		break;
+	case 'B':
+		/*cout << "Input new value: "; cin >> newString;
+		aud.setType(newString);
+		newString = aud.TransformObjDataToLine();
+		found = Table.findStudentAudience(aud.getNumber());
+		replaceTheLineiInFile(found, newString);*/
+		break;
+	case 'G':
+		/*cout << "Input new value: "; cin >> newString;
+		aud.setType(newString);
+		newString = aud.TransformObjDataToLine();
+		found = Table.findStudentAudience(aud.getNumber());
+		replaceTheLineiInFile(found, newString);*/
+		break;
+	case 'J':
+		/*cout << "Input new value: "; cin >> newString;
+		aud.setType(newString);
+		newString = aud.TransformObjDataToLine();
+		found = Table.findStudentAudience(aud.getNumber());
+		replaceTheLineiInFile(found, newString);*/
+		break;
+	case 'A':
+		/*cout << "Input new value: "; cin >> newString;
+		aud.setType(newString);
+		newString = aud.TransformObjDataToLine();
+		found = Table.findStudentAudience(aud.getNumber());
+		replaceTheLineiInFile(found, newString);*/
+		break;
+	}
+}
 // insert-s
 void AddNewStudent() {
 	Student stud;
 	stud.createObj();
 	// id check
-	
-	streampos found = Table.findStudentAudience(stud);
+	int num = stud.getAudience();
+	streampos found = Table.findStudentAudience(num);
 	string line = readLineFromPosition(found, "audience.txt");
 	Audience foundAud = createAudfromLine(line);
 	foundAud.showObject();
