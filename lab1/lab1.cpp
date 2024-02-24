@@ -17,9 +17,18 @@ int main()
     //ut-m
     showMasterFile();
 
+    //indert-m
+    //AddNewAudience();
+    //AddNewAudience();
+
     //ut-s
     showSlave();
 
+    AddNewStudent();
+    
+    
+    cout << "Hello World!\n";
+    
     //insert-m
     /*AddNewAudience();
     AddNewAudience();*/
@@ -27,7 +36,7 @@ int main()
 
     //get-s
     //not working
-    findTheStudent();
+    //findTheStudent();
 
     /*Audience aud = getAudience();
     if (aud.getNumber() != -1) {
@@ -38,6 +47,5 @@ int main()
     //findTheAudience();
     
     //insert-s
-    AddNewStudent();
-    cout << "Hello World!\n";
+    
 }

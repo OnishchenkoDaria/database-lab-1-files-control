@@ -494,25 +494,32 @@ void AddNewStudent() {
 	StudentNode stud;
 	stud.createObj();
 	// id check
-	int num = stud.getAudience();
-	streampos found = findStudentAudience(num, Table);
+
+	streampos found = findStudentAudience(stud.getAudience(), Table);
+	//cout << "Found : " << found << endl;
+
 	string line = readLineFromPosition(found, "audience.txt");
 	Audience foundAud = createAudfromLine(line);
 	//foundAud.showObject();
-	StudentNode head;
+
 	//StudentNode head = createNode(stud, foundAud);
 	if (foundAud.getStudentSubList() != -1) {
-		head.setNext(foundAud.getStudentSubList());
+		stud.setNext(foundAud.getStudentSubList());
 		//update the student attribute in audience master file
 	}
-	head.userData();
-	streampos NewStudentsHeadPos = writeStudentToFile(head);
-	int prevCount = foundAud.getStudentCount();
+	stud.userData();
+
+	streampos NewStudentsHeadPos = writeStudentToFile(stud);
+	
+	//int prevCount = foundAud.getStudentCount();
 	//cout << "prevCount: " << prevCount << endl;
-	foundAud.setStudentCount(prevCount + 1);
+
+	foundAud.setStudentCount(foundAud.getStudentCount() + 1);
 	//cout << "newCount: " << foundAud.getStudentCount() << endl;
+
 	foundAud.setStudentSubList(NewStudentsHeadPos);
 	//cout << "newStudentSubList: " << foundAud.getStudentSubList() << endl;
+
 	string replacement = foundAud.TransformObjDataToLine();
 	//cout << "REPLACEMENT: " << replacement << endl;
 	replaceTheLineiInFile(found, replacement);
