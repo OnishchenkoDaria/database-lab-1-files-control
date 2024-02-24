@@ -245,7 +245,11 @@ void AddToIndexTable(indexNode obj) {
 
 void AddNewAudience() {
 	Audience aud;
-	aud.creteObj();
+	aud.createObj(Table);
+	if (aud.getNumber() == -1) {
+		cerr << "The item with such Id already exist!" << endl;
+		return;
+	}
 	// Перевірка на наявність ідентифікатора
 	streampos startPos = writeAudienceToFile(aud); // Отримуємо позицію початку рядку у файлі
 	if (startPos != -1) { // Якщо запис відбувся успішно
@@ -288,7 +292,7 @@ Audience createAudfromLine(string line) {
 	}
 }
 
-Audience findTheAudience(int id) {
+Audience findAudience(int id) {
 	//int id = AskForId();
 	streampos pos = findById(id, Table);
 	if (pos != -1) {
@@ -304,7 +308,7 @@ Audience findTheAudience(int id) {
 }
 
 Audience getAudience() {
-	return findTheAudience(AskForId());
+	return findAudience(AskForId());
 }
 
 void deleteMaster() {
@@ -336,7 +340,7 @@ StudentNode findStudentFromFile(int inputId, streampos position) {
 
 StudentNode findTheStudent() {
 	//use get-m
-	Audience foundMaster = findTheAudience(AskForId());
+	Audience foundMaster = findAudience(AskForId());
 	int id = AskForId();
 	//cout << "pos: " << foundMaster.getStudentSubList() << endl;
 	return findStudentFromFile(id, foundMaster.getStudentSubList());

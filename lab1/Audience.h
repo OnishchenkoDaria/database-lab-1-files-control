@@ -1,4 +1,5 @@
 #pragma once
+#include "indexNode.h"
 #include <iostream>
 #include <string>
 #include <fstream>
@@ -37,9 +38,13 @@ public:
 		this->setStudentCount(count);
 	}
 
-	void creteObj() {
+	void createObj(indexNode* head) {
 		cout << "Insert AUDIENCE number:   ";
 		cin >> this->Number;
+		if (checkId(this->Number, head) == false) {
+			this->setNumber(-1);
+			return;
+		}
 		cout << "Insert AUDIENCE floor:   ";
 		cin >> this->Floor;
 		cout << "Insert AUDIENCE type:   ";

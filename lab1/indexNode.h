@@ -48,6 +48,8 @@ streampos findById(int id, indexNode* head);
 
 streampos findStudentAudience(int AudNumber, indexNode* head);
 
+bool checkId(int inputId, indexNode* head);
+
 	/*void AddNewNodeToList(indexNode** head, const indexTable& obj) {
 		indexNode* temp = new indexNode(obj);
 		temp->Next = NULL;

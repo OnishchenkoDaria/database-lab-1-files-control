@@ -17,35 +17,27 @@ int main()
     //ut-m
     showMasterFile();
 
-    //indert-m
-    //AddNewAudience();
-    //AddNewAudience();
+    //insert-m
+  AddNewAudience();
 
     //ut-s
     showSlave();
 
-    AddNewStudent();
+    //insert-s
+//  AddNewStudent();
     
-    
-    cout << "Hello World!\n";
-    
-    //insert-m
-    /*AddNewAudience();
-    AddNewAudience();*/
     //get-m
-
+    getAudience();
+    
     //get-s
     //not working
     //findTheStudent();
 
+    //edit-m
     /*Audience aud = getAudience();
     if (aud.getNumber() != -1) {
         EditAudience(aud);
     }*/
-    
-    
-    //findTheAudience();
-    
-    //insert-s
-    
+
+    cout << "Hello World!\n";
 }

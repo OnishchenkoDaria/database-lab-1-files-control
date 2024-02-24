@@ -1,3 +1,4 @@
  1 1 lab knu fccs 1 200 4
- 2 2 lab kpi fiot 1 165 3
+ 2 2 lab kpi fiot 1 233 4
  3 3 lec uad fd 1 -1 0
+ 4 4 lab kneu fm 1 -1 0

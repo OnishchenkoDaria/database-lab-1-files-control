@@ -37,23 +37,23 @@ void addNewIndex(int num, streampos pos, indexNode** head) {
 }
 
 void showAllList(indexNode* head) {
-	indexNode* temp = head;
+	//indexNode* temp = head;
 
-	while (temp != NULL) {
-		cout << "Key (AUDIENCE NUMBER): " << temp->getAudienceNumber() 
-			 << "   Address: " << temp->getAudienceLink() << endl;
-		temp = temp->getNext();
+	while (head != NULL) {
+		cout << "Key (AUDIENCE NUMBER): " << head->getAudienceNumber() 
+			 << "   Address: " << head->getAudienceLink() << endl;
+		head = head->getNext();
 	}
 }
 
 streampos findById(int id, indexNode* head) {
-	indexNode* temp = head;
-	while (temp) {
-		if (temp->getAudienceNumber() == id) {
-			return temp->getAudienceLink();
+	//indexNode* temp = head;
+	while (head) {
+		if (head->getAudienceNumber() == id) {
+			return head->getAudienceLink();
 		}
 		else {
-			temp = temp->getNext();
+			head = head->getNext();
 		}
 	}
 	cout << "No such item with id: " << id << endl;
@@ -62,19 +62,36 @@ streampos findById(int id, indexNode* head) {
 
 streampos findStudentAudience(int AudNumber, indexNode* head) {
 	//int AudNumber = stud.getAudience();
-	indexNode* temp = head;
-	while (temp != NULL) {
-		if (temp->getAudienceNumber() == AudNumber) {
-			cout << "Found: Audience: " << temp->getAudienceNumber()
-				<< "   Link: " << temp->getAudienceLink() << endl;
-			return temp->getAudienceLink();
+	//indexNode* temp = head;
+	while (head != NULL) {
+		if (head->getAudienceNumber() == AudNumber) {
+			cout << "Found: Audience: " << head->getAudienceNumber()
+				<< "   Link: " << head->getAudienceLink() << endl;
+			return head->getAudienceLink();
 		}
 		else {
-			temp = temp->getNext();
+			head = head->getNext();
 		}
 	}
 	cout << "Error. No Audience with such a Number was recorded" << endl;
 	return NULL;
+}
+
+bool checkId(int inputId, indexNode* head) {
+	if (!head) {
+		cerr << "The list does not exist!" << endl;
+	}
+	else {
+		while (head) {
+			if (inputId == head->getAudienceNumber()) {
+				return false;
+			}
+			head = head->getNext();
+			if (head == NULL) {
+				return true;
+			}
+		}
+	}
 }
 
 /*indexTable indexNode::getItemData() {
