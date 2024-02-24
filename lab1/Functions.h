@@ -4,12 +4,12 @@
 #include <fstream>
 #include "Audience.h"
 #include "StudentNode.h"
-#include "indexTable.h"
+//#include "indexTable.h"
 #include "indexNode.h"
-#include "indexTableList.h"
+//#include "indexTableList.h"
 #include <sstream>
 
-indexTableList Table;
+indexNode* Table = new indexNode;
 StudentNode* head = new StudentNode;
 
 //const int MAXrecordsSIZE = 20;
@@ -140,7 +140,7 @@ void showSlave() {
 	cout << endl;
 }
 
-indexTable readIndexFromFile(ifstream& file) {
+indexNode readIndexFromFile(ifstream& file) {
 	string line;
 	if (getline(file, line)) {
 		istringstream iss(line);
@@ -150,16 +150,16 @@ indexTable readIndexFromFile(ifstream& file) {
 		if (iss >> num >> address) {
 			cout << "num: " << num << " address: " << address << endl;
 			streampos Adrs = address;
-			return indexTable(num, Adrs);
+			return indexNode(num, Adrs);
 		}
 		else {
 			cout << "Invalid text found in index file" << endl;
-			return indexTable();
+			return indexNode();
 		}
 	}
 	else {
 		cout << "Failed to read the line in index file" << endl;
-		return indexTable();
+		return indexNode();
 	}
 }
 
@@ -173,13 +173,12 @@ void readAllIndexTable() {
 	
 	//string line;
 	while (!inFile.eof()) {
-		indexTable indx = readIndexFromFile(inFile);
+		indexNode indx = readIndexFromFile(inFile);
 		//indx.showObj();
 		if ((indx.getAudienceLink() != -1) or (indx.getAudienceNumber() != 0)) {
-			Table.addNewItem(indx);
+			addNewIndex(indx.getAudienceNumber(), indx.getAudienceLink(), &Table);
 		}
 	}
-	Table.showAllList();
 }
 
 streampos writeAudienceToFile(Audience obj) {
@@ -228,7 +227,7 @@ streampos writeStudentToFile(StudentNode obj) {
 	//outFile.close();
 }
 
-void AddNewIndexRecord(indexTable obj) {
+void AddNewIndexRecord(indexNode obj) {
 	ofstream outFile("index.txt", ios::app);
 
 	if (!outFile) {
@@ -239,8 +238,8 @@ void AddNewIndexRecord(indexTable obj) {
 	outFile << obj.getAudienceNumber() << " " << obj.getAudienceLink() << endl;
 }
 
-void AddToIndexTable(indexTable obj) {
-	Table.addNewItem(obj);
+void AddToIndexTable(indexNode obj) {
+	addNewIndex(obj.getAudienceNumber(), obj.getAudienceLink(), &Table);
 	//Table.showAllList();
 }
 
@@ -250,7 +249,7 @@ void AddNewAudience() {
 	// Перевірка на наявність ідентифікатора
 	streampos startPos = writeAudienceToFile(aud); // Отримуємо позицію початку рядку у файлі
 	if (startPos != -1) { // Якщо запис відбувся успішно
-		indexTable obj(aud.getNumber(), startPos); // Передаємо позицію початку рядку
+		indexNode obj(aud.getNumber(), startPos); // Передаємо позицію початку рядку
 		AddToIndexTable(obj);
 		AddNewIndexRecord(obj);
 	}
@@ -291,7 +290,7 @@ Audience createAudfromLine(string line) {
 
 Audience findTheAudience(int id) {
 	//int id = AskForId();
-	streampos pos = Table.findById(id);
+	streampos pos = findById(id, Table);
 	if (pos != -1) {
 		string line = readLineFromPosition(pos, "audience.txt");
 		return createAudfromLine(line);
@@ -409,28 +408,28 @@ void EditAudience(Audience& aud) {
 		cout << "Input new value: "; cin >> newFloor;
 		aud.setFloor(newFloor);
 		newString = aud.TransformObjDataToLine();
-		found = Table.findStudentAudience(aud.getNumber());
+		found = findStudentAudience(aud.getNumber(), Table);
 		replaceTheLineiInFile(found, newString);
 		break;
 	case 'T':
 		cout << "Input new value: "; cin >> newString;
 		aud.setType(newString);
 		newString = aud.TransformObjDataToLine();
-		found = Table.findStudentAudience(aud.getNumber());
+		found = findStudentAudience(aud.getNumber(), Table);
 		replaceTheLineiInFile(found, newString);
 		break;
 	case 'U':
 		cout << "Input new value: "; cin >> newString;
 		aud.setType(newString);
 		newString = aud.TransformObjDataToLine();
-		found = Table.findStudentAudience(aud.getNumber());
+		found = findStudentAudience(aud.getNumber(), Table);
 		replaceTheLineiInFile(found, newString);
 		break;
 	case 'A':
 		cout << "Input new value: "; cin >> newString;
 		aud.setType(newString);
 		newString = aud.TransformObjDataToLine();
-		found = Table.findStudentAudience(aud.getNumber());
+		found = findStudentAudience(aud.getNumber(), Table);
 		replaceTheLineiInFile(found, newString);
 		break;
 	}
@@ -496,7 +495,7 @@ void AddNewStudent() {
 	stud.createObj();
 	// id check
 	int num = stud.getAudience();
-	streampos found = Table.findStudentAudience(num);
+	streampos found = findStudentAudience(num, Table);
 	string line = readLineFromPosition(found, "audience.txt");
 	Audience foundAud = createAudfromLine(line);
 	//foundAud.showObject();

@@ -4,12 +4,12 @@
 #include <string>
 
 using namespace std;
-struct indexTable
+/*struct indexTable
 {
 private:
 	int AudienceNumber;
 	streampos position;
-	//indexTable* Next;
+	indexTable* Next;
 public:
 	//methods
 
@@ -40,7 +40,7 @@ public:
 
 	void showObj() {
 		cout << "OBJECT >> num: " << this->getAudienceNumber() << " address: " << this->getAudienceLink() << endl;
-	}
+	}*/
 
 	//ÏÐÀÖÞÞ×² ÌÅÒÎÄÈ ÍÈÆ×Å 
 	
@@ -49,4 +49,4 @@ public:
 	//void findAudience(Student stud, indexTable* head);
 
 	//void printTable(indexTable* head);
-};
+//};

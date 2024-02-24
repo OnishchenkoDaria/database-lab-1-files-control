@@ -1,12 +1,12 @@
 #include "indexTable.h"
 
-void indexTable::setAudienceNumber(int num) {
+/*void indexTable::setAudienceNumber(int num) {
 	this->AudienceNumber = num;
 }
 
 int indexTable::getAudienceNumber() {
 	return this->AudienceNumber;
-}
+}*/
 
 //check for the keys, some KEYS CAN BE DELETED AFTER DELETE FUNCTION
 //INSERT NEW OBJECT AT Missing key place

@@ -4,7 +4,7 @@
 #include "indexNode.h"
 
 using namespace std;
-struct indexTableList
+/*struct indexTableList
 {
 private:
 	indexNode* head;
@@ -25,8 +25,8 @@ public:
 	streampos findById(int id){
 		indexNode* temp = head;
 		while (temp) {
-			if (temp->getItemData().getAudienceNumber() == id) {
-				return temp->getItemData().getAudienceLink();
+			if (temp->getAudienceNumber() == id) {
+				return temp->getAudienceLink();
 			}
 			else {
 				temp = temp->getNext();
@@ -35,4 +35,4 @@ public:
 		cout << "No such item with id: " << id << endl;
 		return -1;
 	}
-};
+};*/

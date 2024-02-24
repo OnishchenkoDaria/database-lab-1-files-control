@@ -1,2 +1,2 @@
  1 1 lab knu fccs 1 100 4
- 2 2 lab kpi fiot 1 165 2
+ 2 2 lab kpi fiot 1 200 3

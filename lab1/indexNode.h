@@ -7,25 +7,47 @@ using namespace std;
 struct indexNode
 {
 private:
-	indexTable item;
+	int AudienceNumber;
+	streampos position;
+	//indexTable item;
 	indexNode* Next;
 public:
 
 	indexNode() {
-		this->Next = NULL;
+		this->AudienceNumber = 0;
+		this->position = -1;
+		this->Next = NULL;;
 	}
 	
-	indexNode(const indexTable& obj) {
-		this->item = obj;
+	indexNode(int num, streampos pos) {
+		this->AudienceNumber = num;
+		this->position = pos;
 		//cout << "Making Node: " << this->item.getAudienceNumber() << " " << this->item.getAudienceLink() << endl;
 		this->Next = NULL;
 	}
 
-	void printNode() {
-		cout << "Item: ID " << this->item.getAudienceNumber() << " LINK " << this->item.getAudienceLink() << " || Next: " << this->Next << endl;
-	}
+	void printNode();
 
+	void setAudienceNumber(int num);
 
+	int getAudienceNumber();
+
+	void setAudienceLink(streampos pos);
+
+	streampos getAudienceLink();
+
+	void setNext(indexNode* temp);
+
+	indexNode* getNext();
+};
+	
+void addNewIndex(int num, streampos pos, indexNode** head);
+	
+void showAllList(indexNode* head);
+
+streampos findById(int id, indexNode* head);
+
+streampos findStudentAudience(int AudNumber, indexNode* head);
 
 	/*void AddNewNodeToList(indexNode** head, const indexTable& obj) {
 		indexNode* temp = new indexNode(obj);
@@ -73,9 +95,4 @@ public:
 		return NULL;
 	}*/
 
-	void setNext(indexNode* temp);
-
-	indexNode* getNext();
-
-	indexTable getItemData();
-};
+	//indexTable getItemData();
