@@ -3,9 +3,7 @@
 
 #include <iostream>
 #include "Audience.h"
-#include "indexTable.h"
 #include "indexNode.h"
-#include "indexTableList.h"
 #include "Functions.h"
 using namespace std;
 

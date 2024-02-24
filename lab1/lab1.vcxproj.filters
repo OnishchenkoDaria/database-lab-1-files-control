@@ -21,16 +21,10 @@
     <ClCompile Include="Audience.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="indexTable.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
     <ClCompile Include="Functions.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="indexNode.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="indexTableList.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="StudentNode.cpp">
@@ -41,16 +35,10 @@
     <ClInclude Include="Audience.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="indexTable.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Functions.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="indexNode.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="indexTableList.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="StudentNode.h">

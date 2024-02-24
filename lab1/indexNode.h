@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <string>
-#include "indexTable.h"
 
 using namespace std;
 struct indexNode
