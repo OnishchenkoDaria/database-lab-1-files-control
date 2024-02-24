@@ -1,6 +1,7 @@
 #pragma once
-#include "Student.h"
 #include <sstream>
+#include <iostream>
+using namespace std;
 
 using namespace std;
 struct StudentNode

@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include "Audience.h"
-#include "Student.h"
 #include "indexTable.h"
 #include "indexNode.h"
 #include "indexTableList.h"
