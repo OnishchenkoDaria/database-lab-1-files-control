@@ -3,13 +3,15 @@
 #include <string>
 #include <fstream>
 #include "Audience.h"
-#include "Student.h"
+#include "StudentNode.h"
 #include "indexTable.h"
 #include "indexNode.h"
 #include "indexTableList.h"
 #include <sstream>
 
 indexTableList Table;
+StudentNode* head = new StudentNode;
+
 //const int MAXrecordsSIZE = 20;
 //int MasterArr[MAXrecordsSIZE], SlaveArr[MAXrecordsSIZE];
 
@@ -75,8 +77,7 @@ StudentNode createStudfromLine(string line) {
 			<< " Group: " << group << " | "
 			<< " Audience: " << audience << " | " << endl;*/
 		pos = position;
-		Student stud(id, name, date, gender, group, audience, visib);
-		return StudentNode(stud, pos);
+		return StudentNode(id, name, date, gender, group, audience, visib);
 	}
 	else {
 		return StudentNode();
@@ -214,13 +215,13 @@ streampos writeStudentToFile(StudentNode obj) {
 	outFile << " ";
 	streampos startPos = outFile.tellp();
 	cout << "POSITION IN STUDENT FILE: " << startPos << endl;
-	outFile << obj.getStudentData().getId() << " "
-		<< obj.getStudentData().getName() << " "
-		<< obj.getStudentData().getDate() << " "
-		<< obj.getStudentData().getGender() << " "
-		<< obj.getStudentData().getGroup() << " "
-		<< obj.getStudentData().getAudience() << " "
-		<< obj.getStudentData().getVisibility() << " "
+	outFile << obj.getId() << " "
+		<< obj.getName() << " "
+		<< obj.getDate() << " "
+		<< obj.getGender() << " "
+		<< obj.getGroup() << " "
+		<< obj.getAudience() << " "
+		<< obj.getVisibility() << " "
 		<< obj.getNextStudent() << endl;
 
 	return startPos;
@@ -291,8 +292,16 @@ Audience createAudfromLine(string line) {
 Audience findTheAudience(int id) {
 	//int id = AskForId();
 	streampos pos = Table.findById(id);
-	string line = readLineFromPosition(pos, "audience.txt");
-	return createAudfromLine(line);
+	if (pos != -1) {
+		string line = readLineFromPosition(pos, "audience.txt");
+		return createAudfromLine(line);
+	}
+	else {
+		Audience Empty;
+		Empty.setNumber(-1);
+		return Empty;
+
+	}
 }
 
 Audience getAudience() {
@@ -311,8 +320,8 @@ StudentNode findStudentFromFile(int inputId, streampos position) {
 	//cout << line << endl;
 	StudentNode stud = createStudfromLine(line);
 	//stud.getStudentData().showObject();
-	if (inputId == stud.getStudentData().getId()) {
-		stud.getStudentData().showObject();
+	if (inputId == stud.getId()) {
+		stud.userData();
 		return stud;
 	}
 	else {
@@ -370,7 +379,7 @@ void replaceTheLineiInFile(streampos position, const string& newString) {
 	file.close();
 }
 
-StudentNode createNode(Student stud, Audience foundAud) {
+/*StudentNode createNode(Student stud, Audience foundAud) {
 	if (foundAud.getStudentSubList() == -1) {
 		return StudentNode(stud);
 		//update the student attribute in audience master file
@@ -379,6 +388,7 @@ StudentNode createNode(Student stud, Audience foundAud) {
 		return StudentNode(stud, foundAud.getStudentSubList());
 	}
 }
+*/
 
 void EditAudience(Audience& aud) {
 	char answer;
@@ -445,7 +455,7 @@ void EditStudent(StudentNode& stud) {
 	{
 	case 'N':
 		cout << "Input new value: "; cin >> newString;
-		stud.getStudentData().setName(newString);
+		stud.setName(newString);
 		newString = stud.TransformObjDataToLine();
 		//
 		replaceTheLineiInFile(found, newString);
@@ -482,24 +492,29 @@ void EditStudent(StudentNode& stud) {
 }
 // insert-s
 void AddNewStudent() {
-	Student stud;
+	StudentNode stud;
 	stud.createObj();
 	// id check
 	int num = stud.getAudience();
 	streampos found = Table.findStudentAudience(num);
 	string line = readLineFromPosition(found, "audience.txt");
 	Audience foundAud = createAudfromLine(line);
-	foundAud.showObject();
-	StudentNode head = createNode(stud, foundAud);
-	head.showObj();
+	//foundAud.showObject();
+	StudentNode head;
+	//StudentNode head = createNode(stud, foundAud);
+	if (foundAud.getStudentSubList() != -1) {
+		head.setNext(foundAud.getStudentSubList());
+		//update the student attribute in audience master file
+	}
+	head.userData();
 	streampos NewStudentsHeadPos = writeStudentToFile(head);
 	int prevCount = foundAud.getStudentCount();
-	cout << "prevCount: " << prevCount << endl;
+	//cout << "prevCount: " << prevCount << endl;
 	foundAud.setStudentCount(prevCount + 1);
-	cout << "newCount: " << foundAud.getStudentCount() << endl;
+	//cout << "newCount: " << foundAud.getStudentCount() << endl;
 	foundAud.setStudentSubList(NewStudentsHeadPos);
-	cout << "newStudentSubList: " << foundAud.getStudentSubList() << endl;
+	//cout << "newStudentSubList: " << foundAud.getStudentSubList() << endl;
 	string replacement = foundAud.TransformObjDataToLine();
-	cout << "REPLACEMENT: " << replacement << endl;
+	//cout << "REPLACEMENT: " << replacement << endl;
 	replaceTheLineiInFile(found, replacement);
 }

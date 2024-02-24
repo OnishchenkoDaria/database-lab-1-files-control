@@ -33,6 +33,6 @@ public:
 			}
 		}
 		cout << "No such item with id: " << id << endl;
-		return 0;
+		return -1;
 	}
 };

@@ -29,10 +29,14 @@ int main()
     //get-m
 
     //get-s
+    //not working
     findTheStudent();
 
     Audience aud = getAudience();
-    EditAudience(aud);
+    if (aud.getNumber() != -1) {
+        EditAudience(aud);
+    }
+    
     
     //findTheAudience();
     

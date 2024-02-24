@@ -3,7 +3,6 @@
 #include <string>
 #include <fstream>
 #include <sstream>
-#include "StudentList.h"
 
 using namespace std;
 

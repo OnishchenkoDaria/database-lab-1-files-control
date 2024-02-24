@@ -134,7 +134,6 @@
     <ClCompile Include="lab1.cpp" />
     <ClCompile Include="indexNode.cpp" />
     <ClCompile Include="Student.cpp" />
-    <ClCompile Include="StudentList.cpp" />
     <ClCompile Include="StudentNode.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -145,7 +144,6 @@
     <ClInclude Include="indexTableList.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Student.h" />
-    <ClInclude Include="StudentList.h" />
     <ClInclude Include="StudentNode.h" />
   </ItemGroup>
   <ItemGroup>
