@@ -86,6 +86,10 @@ void StudentNode::setNext(streampos next) {
 
 void StudentNode::createObj() {
 	cout << "Insert STUDENT'S id card number:  ";
+	/*if (checkId(this->StudentId, head) == false) {
+		this->setId(-1);
+		return;
+	}*/
 	cin >> this->StudentId;
 	cout << "Insert STUDENT'S Name:  ";
 	cin >> this->Name;
@@ -99,3 +103,21 @@ void StudentNode::createObj() {
 	cin >> this->Audience;
 	this->Visibility = true;
 }
+
+/*bool checkId(int inputId, StudentNode* head) {
+	if (!head) {
+		cerr << "The list does not exist!" << endl;
+	}
+	else {
+		while (head) {
+			if (inputId == head->getId()) {
+				return false;
+			}
+			//make the index table for the students
+			head = head->getNextStudent();
+			if (head == NULL) {
+				return true;
+			}
+		}
+	}
+}*/

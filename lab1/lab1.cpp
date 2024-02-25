@@ -18,7 +18,7 @@ int main()
     showMasterFile();
 
     //insert-m
-  AddNewAudience();
+//  AddNewAudience();
 
     //ut-s
     showSlave();

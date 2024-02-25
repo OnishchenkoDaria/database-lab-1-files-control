@@ -1,6 +1,8 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <sstream>
+#include <fstream>
 
 using namespace std;
 struct indexNode
@@ -8,7 +10,6 @@ struct indexNode
 private:
 	int AudienceNumber;
 	streampos position;
-	//indexTable item;
 	indexNode* Next;
 public:
 
@@ -21,7 +22,6 @@ public:
 	indexNode(int num, streampos pos) {
 		this->AudienceNumber = num;
 		this->position = pos;
-		//cout << "Making Node: " << this->item.getAudienceNumber() << " " << this->item.getAudienceLink() << endl;
 		this->Next = NULL;
 	}
 
@@ -39,6 +39,8 @@ public:
 
 	indexNode* getNext();
 };
+
+void writeSortedIndexTable(indexNode** head);
 	
 void addNewIndex(int num, streampos pos, indexNode** head);
 	
@@ -50,6 +52,7 @@ streampos findStudentAudience(int AudNumber, indexNode* head);
 
 bool checkId(int inputId, indexNode* head);
 
+void sortIndexTable(indexNode** head);
 	/*void AddNewNodeToList(indexNode** head, const indexTable& obj) {
 		indexNode* temp = new indexNode(obj);
 		temp->Next = NULL;
@@ -95,5 +98,3 @@ bool checkId(int inputId, indexNode* head);
 		cout << "Error. No Audience with such a Number was recorded" << endl;
 		return NULL;
 	}*/
-
-	//indexTable getItemData();

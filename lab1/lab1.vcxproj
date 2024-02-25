@@ -132,6 +132,7 @@
     <ClCompile Include="lab1.cpp" />
     <ClCompile Include="indexNode.cpp" />
     <ClCompile Include="StudentNode.cpp" />
+    <ClCompile Include="Utilities.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Audience.h" />
@@ -139,6 +140,7 @@
     <ClInclude Include="indexNode.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="StudentNode.h" />
+    <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="lab1.rc" />

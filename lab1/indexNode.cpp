@@ -30,15 +30,40 @@ indexNode* indexNode::getNext() {
 	return this->Next;
 }
 
+void writeSortedIndexTable(indexNode** head) {
+	ofstream outFile("index.txt");
+
+	if (!outFile) {
+		cout << "Error opening index file!" << endl;
+		return;
+	}
+
+	indexNode* temp = *head;
+	while (temp) {
+		//cout << temp->getAudienceNumber() << " " << temp->getAudienceLink() << endl;
+		outFile << temp->getAudienceNumber() << " " << temp->getAudienceLink() << endl;
+		temp = temp->getNext();
+	}
+
+	outFile.close();
+}
+
 void addNewIndex(int num, streampos pos, indexNode** head) {
 	indexNode* temp = new indexNode(num, pos);
+
+	if (((*head)->getAudienceNumber() == 0) or ((*head)->getAudienceLink() == -1)) {
+		*head = temp;
+		return;
+	}
+
 	temp->setNext(*head);
 	*head = temp;
+	
+	//write the updated table down
+	writeSortedIndexTable(head);
 }
 
 void showAllList(indexNode* head) {
-	//indexNode* temp = head;
-
 	while (head != NULL) {
 		cout << "Key (AUDIENCE NUMBER): " << head->getAudienceNumber() 
 			 << "   Address: " << head->getAudienceLink() << endl;
@@ -80,6 +105,7 @@ streampos findStudentAudience(int AudNumber, indexNode* head) {
 bool checkId(int inputId, indexNode* head) {
 	if (!head) {
 		cerr << "The list does not exist!" << endl;
+		return true;
 	}
 	else {
 		while (head) {
@@ -92,6 +118,38 @@ bool checkId(int inputId, indexNode* head) {
 			}
 		}
 	}
+}
+
+void sortIndexTable(indexNode** head) {
+	//check for empty or single-item list
+	if (!(*head) or (*head)->getNext() == NULL) {
+		return;
+	}
+
+	bool swapped;
+	indexNode* ptr, * last = NULL;
+	do {
+		swapped = false;
+		ptr = *head;
+
+		while (ptr->getNext() != last) {
+			if (ptr->getAudienceNumber() > ptr->getNext()->getAudienceNumber()) {
+				int num = ptr->getAudienceNumber();
+				streampos pos = ptr->getAudienceLink();
+
+				ptr->setAudienceNumber(ptr->getNext()->getAudienceNumber());
+				ptr->setAudienceLink(ptr->getNext()->getAudienceLink());
+
+				ptr->getNext()->setAudienceNumber(num);
+				ptr->getNext()->setAudienceLink(pos);
+
+				swapped = true;
+			}
+			ptr = ptr->getNext();
+		}
+		last = ptr; //reached the end -> mark last sorted nnode
+	} while (swapped);
+
 }
 
 /*indexTable indexNode::getItemData() {

@@ -109,3 +109,16 @@ public:
 	
 	void createObj();
 };
+
+/*struct StudentList {
+private:
+	StudentNode student;
+	StudentList* Next;
+public:
+	StudentList(StudentNode student) {
+		this->student = student;
+		this->Next = NULL;
+	}
+
+
+};*/
