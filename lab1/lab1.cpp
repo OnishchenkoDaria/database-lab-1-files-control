@@ -24,7 +24,7 @@ int main()
     showSlave();
 
     //insert-s
-//  AddNewStudent();
+  AddNewStudent();
     
     //get-m
     getAudience();
