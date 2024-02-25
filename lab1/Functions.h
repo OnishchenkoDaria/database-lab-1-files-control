@@ -9,7 +9,8 @@
 #include "indexNode.h"
 
 indexNode* indexHead = new indexNode;
-StudentNode* head = new StudentNode;
+indexNode* studentsHead = new indexNode;
+//StudentNode* head = new StudentNode;
 
 void readAllIndexTable() {
 	ifstream inFile("index.txt");
@@ -30,7 +31,31 @@ void readAllIndexTable() {
 	}
 
 	sortIndexTable(&indexHead);
+	cout << "AUDIENCE INDEX TABLE" << endl;
 	showAllList(indexHead);
+}
+
+void readAllStudentTable() {
+	ifstream inFile("studentTable.txt");
+
+	if (!inFile) {
+		cout << "Error opening index file!" << endl;
+		return;
+	}
+
+	while (!inFile.eof()) {
+		indexNode indx = readIndexFromFile(inFile);
+
+		if ((indx.getAudienceLink() != -1) or (indx.getAudienceNumber() != 0)) {
+			//indexHead->printNode();
+			//indx.printNode();
+			addNewIndex(indx.getAudienceNumber(), indx.getAudienceLink(), &studentsHead);
+		}
+	}
+
+	sortIndexTable(&studentsHead);
+	cout << "STUDENT INDEX TABLE" << endl;
+	showAllList(studentsHead);
 }
 
 void showMasterFile(){
@@ -69,15 +94,18 @@ void AddNewAudience() {
 		cerr << "The item with such Id already exist!" << endl;
 		return;
 	}
-	// Перевірка на наявність ідентифікатора
-	streampos startPos = writeAudienceToFile(aud); // Отримуємо позицію початку рядку у файлі
-	if (startPos != -1) { // Якщо запис відбувся успішно
-		indexNode obj(aud.getNumber(), startPos); // Передаємо позицію початку рядку
+	
+	streampos startPos = writeAudienceToFile(aud);
+	if (startPos != -1) {
+		indexNode obj(aud.getNumber(), startPos);
 		addNewIndex(obj.getAudienceNumber(), obj.getAudienceLink(), &indexHead);
-		writeNewIndexRecord(obj);
+		writeNewIndexRecord(obj, "index.txt");
+	}
+	else {
+		return;
 	}
 	sortIndexTable(&indexHead);
-	writeSortedIndexTable(&indexHead);
+	writeSortedIndexTable(&indexHead, "index.txt");
 }
 /// THE ADD NEW MASTER --- FINISH
 int AskForId() {
@@ -95,20 +123,65 @@ Audience findAudience(int id) {
 		return createAudfromLine(line);
 	}
 	else {
+		cerr << "No Audience with such Number recorded earlier" << endl;
 		Audience Empty;
 		Empty.setNumber(-1);
 		return Empty;
-
 	}
+}
+
+void AddNewStudent() {
+	StudentNode stud;
+	stud.createObj(studentsHead);
+	if (stud.getId() == -1) {
+		cerr << "The item with such Id already exist!" << endl;
+		return;
+	}
+	// id check (modernise the function for the master)
+
+	streampos found = findStudentAudience(stud.getAudience(), indexHead);
+	Audience foundAud = findAudience(stud.getAudience());
+	if (foundAud.getNumber() == -1) {
+		return;
+	}
+
+	//StudentNode head = createNode(stud, foundAud);
+	if (foundAud.getStudentSubList() != -1) {
+		stud.setNext(foundAud.getStudentSubList());
+		//update the student attribute in audience master file
+	}
+	//stud.userData();
+
+	streampos NewStudentsHeadPos = writeStudentToFile(stud);
+	
+	if (NewStudentsHeadPos != -1) {
+		indexNode obj(stud.getId(), NewStudentsHeadPos);
+		cout << "new student index object: "; obj.printNode();
+		addNewIndex(obj.getAudienceNumber(), obj.getAudienceLink(), &studentsHead);
+		writeNewIndexRecord(obj, "studentTable.txt");
+	}
+	else {
+		return;
+	}
+
+	sortIndexTable(&studentsHead);
+	writeSortedIndexTable(&studentsHead, "studentTable.txt");
+	//int prevCount = foundAud.getStudentCount();
+	//cout << "prevCount: " << prevCount << endl;
+
+	foundAud.setStudentCount(foundAud.getStudentCount() + 1);
+	//cout << "newCount: " << foundAud.getStudentCount() << endl;
+
+	foundAud.setStudentSubList(NewStudentsHeadPos);
+	//cout << "newStudentSubList: " << foundAud.getStudentSubList() << endl;
+
+	string replacement = foundAud.TransformObjDataToLine();
+	//cout << "REPLACEMENT: " << replacement << endl;
+	replaceTheLineiInFile(found, replacement);
 }
 
 Audience getAudience() {
 	return findAudience(AskForId());
-}
-
-void deleteMaster() {
-	Audience aud = getAudience();
-	aud.changeVisibility();
 }
 
 StudentNode findStudentFromFile(int inputId, streampos position) {
@@ -240,35 +313,4 @@ void EditStudent(StudentNode& stud) {
 		replaceTheLineiInFile(found, newString);*/
 		break;
 	}
-}
-// insert-s
-void AddNewStudent() {
-	StudentNode stud;
-	stud.createObj();
-	// id check (modernise the function for the master)
-
-	streampos found = findStudentAudience(stud.getAudience(), indexHead);
-	Audience foundAud = findAudience(stud.getAudience());
-
-	//StudentNode head = createNode(stud, foundAud);
-	if (foundAud.getStudentSubList() != -1) {
-		stud.setNext(foundAud.getStudentSubList());
-		//update the student attribute in audience master file
-	}
-	stud.userData();
-
-	streampos NewStudentsHeadPos = writeStudentToFile(stud);
-
-	//int prevCount = foundAud.getStudentCount();
-	//cout << "prevCount: " << prevCount << endl;
-
-	foundAud.setStudentCount(foundAud.getStudentCount() + 1);
-	//cout << "newCount: " << foundAud.getStudentCount() << endl;
-
-	foundAud.setStudentSubList(NewStudentsHeadPos);
-	//cout << "newStudentSubList: " << foundAud.getStudentSubList() << endl;
-
-	string replacement = foundAud.TransformObjDataToLine();
-	//cout << "REPLACEMENT: " << replacement << endl;
-	replaceTheLineiInFile(found, replacement);
 }

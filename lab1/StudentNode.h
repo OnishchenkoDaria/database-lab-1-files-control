@@ -1,6 +1,7 @@
 #pragma once
 #include <sstream>
 #include <iostream>
+#include "indexNode.h"
 using namespace std;
 
 using namespace std;
@@ -107,7 +108,7 @@ public:
 
 	void setNext(streampos next);
 	
-	void createObj();
+	void createObj(indexNode* head);
 };
 
 /*struct StudentList {

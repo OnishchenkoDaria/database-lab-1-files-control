@@ -13,6 +13,7 @@ int main()
     //at start get functions LOAD for AUDIENCES , STUDENTS , INDEXTABLE
     //preloading
     readAllIndexTable();
+    readAllStudentTable();
     
     //ut-m
     showMasterFile();

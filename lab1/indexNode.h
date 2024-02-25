@@ -40,7 +40,7 @@ public:
 	indexNode* getNext();
 };
 
-void writeSortedIndexTable(indexNode** head);
+void writeSortedIndexTable(indexNode** head, string filename);
 	
 void addNewIndex(int num, streampos pos, indexNode** head);
 	

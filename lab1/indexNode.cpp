@@ -30,8 +30,8 @@ indexNode* indexNode::getNext() {
 	return this->Next;
 }
 
-void writeSortedIndexTable(indexNode** head) {
-	ofstream outFile("index.txt");
+void writeSortedIndexTable(indexNode** head, string filename) {
+	ofstream outFile(filename);
 
 	if (!outFile) {
 		cout << "Error opening index file!" << endl;
@@ -63,10 +63,11 @@ void addNewIndex(int num, streampos pos, indexNode** head) {
 
 void showAllList(indexNode* head) {
 	while (head != NULL) {
-		cout << "Key (AUDIENCE NUMBER): " << head->getAudienceNumber() 
+		cout << "Key: " << head->getAudienceNumber() 
 			 << "   Address: " << head->getAudienceLink() << endl;
 		head = head->getNext();
 	}
+	cout << endl;
 }
 
 streampos findById(int id, indexNode* head) {
@@ -79,7 +80,7 @@ streampos findById(int id, indexNode* head) {
 			head = head->getNext();
 		}
 	}
-	cout << "No such item with id: " << id << endl;
+	//cout << "No such item with id: " << id << endl;
 	return -1;
 }
 

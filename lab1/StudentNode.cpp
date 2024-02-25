@@ -76,13 +76,13 @@ void StudentNode::setNext(streampos next) {
 	this->Next = next;
 }
 
-void StudentNode::createObj() {
+void StudentNode::createObj(indexNode* head) {
 	cout << "Insert STUDENT'S id card number:  ";
-	/*if (checkId(this->StudentId, head) == false) {
+	cin >> this->StudentId;
+	if (checkId(this->getId(), head) == false) {
 		this->setId(-1);
 		return;
-	}*/
-	cin >> this->StudentId;
+	}
 	cout << "Insert STUDENT'S Name:  ";
 	cin >> this->Name;
 	cout << "Insert STUDENT'S birth date:  ";

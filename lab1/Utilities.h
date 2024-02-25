@@ -18,7 +18,7 @@ indexNode readIndexFromFile(ifstream& file);
 
 streampos writeAudienceToFile(Audience obj);
 
-void writeNewIndexRecord(indexNode obj);
+void writeNewIndexRecord(indexNode obj, string filename);
 
 streampos writeStudentToFile(StudentNode obj);
 

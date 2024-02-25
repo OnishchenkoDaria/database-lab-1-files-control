@@ -102,7 +102,7 @@ indexNode readIndexFromFile(ifstream& file) {
 		int num;
 		int address;
 		if (iss >> num >> address) {
-			cout << "num: " << num << " address: " << address << endl;
+			//cout << "num: " << num << " address: " << address << endl;
 			streampos Adrs = address;
 			return indexNode(num, Adrs);
 		}
@@ -140,8 +140,8 @@ streampos writeAudienceToFile(Audience obj) {
 	return startPos;
 }
 
-void writeNewIndexRecord(indexNode obj) {
-	ofstream outFile("index.txt", ios::app);
+void writeNewIndexRecord(indexNode obj, string filename) {
+	ofstream outFile(filename, ios::app);
 
 	if (!outFile) {
 		cout << "Error opening index file!" << endl;
