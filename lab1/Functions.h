@@ -2,11 +2,11 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <sstream>
 #include "Audience.h"
 #include "StudentNode.h"
 #include "Utilities.h"
 #include "indexNode.h"
-#include <sstream>
 
 indexNode* indexHead = new indexNode;
 StudentNode* head = new StudentNode;
@@ -62,11 +62,6 @@ void showSlave() {
 	cout << endl;
 }
 
-void AddToIndexTable(indexNode obj) {
-	addNewIndex(obj.getAudienceNumber(), obj.getAudienceLink(), &indexHead);
-	//indexHead.showAllList();
-}
-
 void AddNewAudience() {
 	Audience aud;
 	aud.createObj(indexHead);
@@ -78,10 +73,11 @@ void AddNewAudience() {
 	streampos startPos = writeAudienceToFile(aud); // Отримуємо позицію початку рядку у файлі
 	if (startPos != -1) { // Якщо запис відбувся успішно
 		indexNode obj(aud.getNumber(), startPos); // Передаємо позицію початку рядку
-		AddToIndexTable(obj);
+		addNewIndex(obj.getAudienceNumber(), obj.getAudienceLink(), &indexHead);
 		writeNewIndexRecord(obj);
 	}
 	sortIndexTable(&indexHead);
+	writeSortedIndexTable(&indexHead);
 }
 /// THE ADD NEW MASTER --- FINISH
 int AskForId() {

@@ -8,19 +8,19 @@ using namespace std;
 struct indexNode
 {
 private:
-	int AudienceNumber;
+	int Number;
 	streampos position;
 	indexNode* Next;
 public:
 
 	indexNode() {
-		this->AudienceNumber = 0;
+		this->Number = 0;
 		this->position = -1;
 		this->Next = NULL;;
 	}
 	
 	indexNode(int num, streampos pos) {
-		this->AudienceNumber = num;
+		this->Number = num;
 		this->position = pos;
 		this->Next = NULL;
 	}

@@ -7,11 +7,11 @@ void indexNode::printNode() {
 }
 
 void indexNode::setAudienceNumber(int num) {
-	this->AudienceNumber = num;
+	this->Number = num;
 }
 
 int indexNode::getAudienceNumber() {
-	return this->AudienceNumber;
+	return this->Number;
 }
 
 void indexNode::setAudienceLink(streampos pos) {
@@ -58,9 +58,7 @@ void addNewIndex(int num, streampos pos, indexNode** head) {
 
 	temp->setNext(*head);
 	*head = temp;
-	
-	//write the updated table down
-	writeSortedIndexTable(head);
+
 }
 
 void showAllList(indexNode* head) {

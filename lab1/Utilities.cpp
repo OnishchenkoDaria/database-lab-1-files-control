@@ -149,6 +149,7 @@ void writeNewIndexRecord(indexNode obj) {
 	}
 
 	outFile << obj.getAudienceNumber() << " " << obj.getAudienceLink() << endl;
+	outFile.close();
 }
 
 streampos writeStudentToFile(StudentNode obj) {
