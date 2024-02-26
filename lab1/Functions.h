@@ -10,7 +10,6 @@
 
 indexNode* indexHead = new indexNode;
 indexNode* studentsHead = new indexNode;
-//StudentNode* head = new StudentNode;
 
 void readAllIndexTable() {
 	ifstream inFile("index.txt");
@@ -108,7 +107,7 @@ void AddNewAudience() {
 	sortIndexTable(&indexHead);
 	writeSortedIndexTable(&indexHead, "index.txt");
 }
-/// THE ADD NEW MASTER --- FINISH
+
 int AskForId() {
 	int id;
 	cout << "Insert id: ";
@@ -140,7 +139,7 @@ void AddNewStudent() {
 	}
 	// id check (modernise the function for the master)
 
-	streampos found = findStudentAudience(stud.getAudience(), indexHead);
+	streampos found = findKey(stud.getAudience(), indexHead);
 	Audience foundAud = findAudience(stud.getAudience());
 	if (foundAud.getNumber() == -1) {
 		return;
@@ -182,32 +181,6 @@ void AddNewStudent() {
 	replaceTheLineiInFile(found, replacement);
 }
 
-Audience getAudience() {
-	return findAudience(AskForId());
-}
-
-/*StudentNode findStudentFromFile(int inputId, streampos position) {
-	ifstream inFile("students.txt");
-
-	string line = readLineFromPosition(position, "students.txt");
-	//cout << line << endl;
-	StudentNode stud = createStudfromLine(line);
-	//stud.getStudentData().showObject();
-	if (inputId == stud.getId()) {
-		stud.userData();
-		return stud;
-	}
-	else {
-		//cout << "next position: " << stud.getNextStudent() << endl;
-		if (stud.getNextStudent() != -1) {
-			findStudentFromFile(inputId, stud.getNextStudent());
-		}
-		else {
-			cout << "No Student with such Id found!" << endl;
-		}
-	}
-}*/
-
 StudentNode findStudent(int id) {
 	streampos pos = findById(id, studentsHead);
 	if (pos != -1) {
@@ -218,12 +191,10 @@ StudentNode findStudent(int id) {
 		cerr << "No Student with such Number recorded earlier" << endl;
 		return StudentNode();
 	}
+}
 
-	//use get-m
-	//Audience foundMaster = findAudience(AskForId());
-	//int id = AskForId();
-	//cout << "pos: " << foundMaster.getStudentSubList() << endl;
-	//return findStudentFromFile(id, foundMaster.getStudentSubList());
+Audience getAudience() {
+	return findAudience(AskForId());
 }
 
 StudentNode getStudent() {
@@ -237,10 +208,9 @@ void EditAudience(Audience& aud) {
 		<< "Press 'U' to change the university data" << endl
 		<< "Press 'A' to change the faculty data" << endl;
 
-	int newFloor;
+	int newFloor{};
 	string newString;
 	streampos found;
-
 
 	cin >> answer;
 	switch (answer)
@@ -248,32 +218,23 @@ void EditAudience(Audience& aud) {
 	case 'F':
 		cout << "Input new value: "; cin >> newFloor;
 		aud.setFloor(newFloor);
-		newString = aud.TransformObjDataToLine();
-		found = findStudentAudience(aud.getNumber(), indexHead);
-		replaceTheLineiInFile(found, newString);
 		break;
 	case 'T':
 		cout << "Input new value: "; cin >> newString;
 		aud.setType(newString);
-		newString = aud.TransformObjDataToLine();
-		found = findStudentAudience(aud.getNumber(), indexHead);
-		replaceTheLineiInFile(found, newString);
 		break;
 	case 'U':
 		cout << "Input new value: "; cin >> newString;
 		aud.setType(newString);
-		newString = aud.TransformObjDataToLine();
-		found = findStudentAudience(aud.getNumber(), indexHead);
-		replaceTheLineiInFile(found, newString);
 		break;
 	case 'A':
 		cout << "Input new value: "; cin >> newString;
 		aud.setType(newString);
-		newString = aud.TransformObjDataToLine();
-		found = findStudentAudience(aud.getNumber(), indexHead);
-		replaceTheLineiInFile(found, newString);
 		break;
 	}
+	newString = aud.TransformObjDataToLine();
+	found = findKey(aud.getNumber(), indexHead);
+	replaceTheLineiInFile(found, newString);
 }
 
 void EditStudent(StudentNode& stud) {
@@ -284,9 +245,9 @@ void EditStudent(StudentNode& stud) {
 		<< "Press 'J' to change the group data" << endl
 		<< "Press 'A' to change the audience data" << endl;
 
-	int newAudince;
+	int newAudince{};
 	string newString;
-	char newGender;
+	char newGender{};
 	streampos found;
 
 
@@ -304,28 +265,28 @@ void EditStudent(StudentNode& stud) {
 		/*cout << "Input new value: "; cin >> newString;
 		aud.setType(newString);
 		newString = aud.TransformObjDataToLine();
-		found = indexHead.findStudentAudience(aud.getNumber());
+		found = indexHead.findKey(aud.getNumber());
 		replaceTheLineiInFile(found, newString);*/
 		break;
 	case 'G':
 		/*cout << "Input new value: "; cin >> newString;
 		aud.setType(newString);
 		newString = aud.TransformObjDataToLine();
-		found = indexHead.findStudentAudience(aud.getNumber());
+		found = indexHead.findKey(aud.getNumber());
 		replaceTheLineiInFile(found, newString);*/
 		break;
 	case 'J':
 		/*cout << "Input new value: "; cin >> newString;
 		aud.setType(newString);
 		newString = aud.TransformObjDataToLine();
-		found = indexHead.findStudentAudience(aud.getNumber());
+		found = indexHead.findKey(aud.getNumber());
 		replaceTheLineiInFile(found, newString);*/
 		break;
 	case 'A':
 		/*cout << "Input new value: "; cin >> newString;
 		aud.setType(newString);
 		newString = aud.TransformObjDataToLine();
-		found = indexHead.findStudentAudience(aud.getNumber());
+		found = indexHead.findKey(aud.getNumber());
 		replaceTheLineiInFile(found, newString);*/
 		break;
 	}

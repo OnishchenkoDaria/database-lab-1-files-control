@@ -34,10 +34,12 @@ int main()
     getStudent().userData();
 
     //edit-m
-    /*Audience aud = getAudience();
+    Audience aud = getAudience();
     if (aud.getNumber() != -1) {
         EditAudience(aud);
-    }*/
+    }
+
+    showMasterFile();
 
     cout << "Hello World!\n";
 }

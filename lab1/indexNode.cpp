@@ -84,13 +84,11 @@ streampos findById(int id, indexNode* head) {
 	return -1;
 }
 
-streampos findStudentAudience(int AudNumber, indexNode* head) {
-	//int AudNumber = stud.getAudience();
-	//indexNode* temp = head;
+streampos findKey(int AudNumber, indexNode* head) {
 	while (head != NULL) {
 		if (head->getAudienceNumber() == AudNumber) {
-			cout << "Found: Audience: " << head->getAudienceNumber()
-				<< "   Link: " << head->getAudienceLink() << endl;
+			/*cout << "Found: Audience: " << head->getAudienceNumber()
+				<< "   Link: " << head->getAudienceLink() << endl;*/
 			return head->getAudienceLink();
 		}
 		else {

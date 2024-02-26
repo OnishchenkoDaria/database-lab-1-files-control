@@ -48,7 +48,7 @@ void showAllList(indexNode* head);
 
 streampos findById(int id, indexNode* head);
 
-streampos findStudentAudience(int AudNumber, indexNode* head);
+streampos findKey(int AudNumber, indexNode* head);
 
 bool checkId(int inputId, indexNode* head);
 
@@ -82,7 +82,7 @@ void sortIndexTable(indexNode** head);
 		}
 	}
 
-	Audience* findStudentAudience(Student stud, indexNode* head) {
+	Audience* findKey(Student stud, indexNode* head) {
 		int AudNumber = stud.getAudience();
 		indexNode* temp = head;
 		while (temp != NULL) {
