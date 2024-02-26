@@ -1,11 +1,3 @@
  1 1 lab knu fccs 1 200 4
- 2 2 lab kpi fiot 1 269 5   
+ 2 2 lab kpi fiot 1 269 5
  3 3 lec uad fd 1 -1 0
- 4 4 lec kneu fm 1 -1 0
- 5 5 lec ip fg 1 -1 0
- 6 6 lec kneu fnk 1 -1 0
- 8 8 lab knu frecs 1 -1 0
- 7 7 lec knu fiot 1 -1 0
- 9 9 lec kpi asc 1 -1 0
- 11 1 lab knu nnic 1 -1 0
- 10 10 lab kneu fk 1 -1 0

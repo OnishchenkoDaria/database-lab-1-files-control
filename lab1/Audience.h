@@ -69,9 +69,7 @@ public:
 		return this->StudentCount;
 	}
 
-	void setStudentCount(int count) {
-		this->StudentCount = count;
-	}
+	void setStudentCount(int count);
 
 	void setNumber(int number);
 
@@ -101,18 +99,5 @@ public:
 
 	void showObject();
 
-	string TransformObjDataToLine() {
-		ostringstream oss;
-
-		oss << this->getNumber() 
-			<< " " << this->getFloor()
-			<< " " << this->getType()
-			<< " " << this->getUniversity()
-			<< " " << this->getFaculty()
-			<< " " << this->getVisibility()
-			<< " " << this->getStudentSubList()
-			<< " " << this->getStudentCount();
-
-		return oss.str();
-	}
+	string TransformObjDataToLine();
 };

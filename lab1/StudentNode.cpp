@@ -7,6 +7,7 @@ void StudentNode::setNextStudent(streampos stud) {
 streampos StudentNode::getNextStudent() {
 	return this->Next;
 }
+
 void StudentNode::setId(int id) {
 	this->StudentId = id;
 }
@@ -76,6 +77,31 @@ void StudentNode::setNext(streampos next) {
 	this->Next = next;
 }
 
+void StudentNode::userData() {
+	cout << " Student Id: " << this->getId() << " | "
+		<< " Name: " << this->getName() << " | "
+		<< " BirthDate: " << this->getDate() << " | "
+		<< " Gender: " << this->getGender() << " | "
+		<< " Group: " << this->getGroup() << " | "
+		<< " Audience: " << this->getAudience() << " | "
+		<< " Next Student: " << this->getNextStudent() << endl;
+}
+
+string StudentNode::TransformObjDataToLine() {
+	ostringstream oss;
+
+	oss << this->getId()
+		<< " " << this->getName()
+		<< " " << this->getDate()
+		<< " " << this->getGender()
+		<< " " << this->getGroup()
+		<< " " << this->getAudience()
+		<< " " << this->getVisibility()
+		<< " " << this->getNextStudent();
+
+	return oss.str();
+}
+
 void StudentNode::createObj(indexNode* head) {
 	cout << "Insert STUDENT'S id card number:  ";
 	cin >> this->StudentId;
@@ -95,21 +121,3 @@ void StudentNode::createObj(indexNode* head) {
 	cin >> this->Audience;
 	this->Visibility = true;
 }
-
-/*bool checkId(int inputId, StudentNode* head) {
-	if (!head) {
-		cerr << "The list does not exist!" << endl;
-	}
-	else {
-		while (head) {
-			if (inputId == head->getId()) {
-				return false;
-			}
-			//make the index table for the students
-			head = head->getNextStudent();
-			if (head == NULL) {
-				return true;
-			}
-		}
-	}
-}*/

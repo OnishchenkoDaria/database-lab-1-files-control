@@ -25,14 +25,13 @@ int main()
     showSlave();
 
     //insert-s
-  AddNewStudent();
+//  AddNewStudent();
     
     //get-m
-    getAudience();
+    getAudience().showObject();
     
     //get-s
-    //not working
-    //findTheStudent();
+    getStudent().userData();
 
     //edit-m
     /*Audience aud = getAudience();

@@ -1,5 +1,9 @@
 #include "Audience.h"
 
+void Audience::setStudentCount(int count) {
+	this->StudentCount = count;
+}
+
 void Audience::setNumber(int number) {
 	this->Number = number;
 }
@@ -58,12 +62,27 @@ streampos Audience::getStudentSubList() {
 }
 
 void Audience::showObject() {
-	cout << " ID Number: " << this->getNumber()
-		<< " Floor: " << this->getFloor()
-		<< " Type: " << this->getType()
-		<< " University: " << this->getUniversity()
-		<< " Faculty: " << this->getFaculty()
-		<< " Visibility: " << this->getVisibility()
-		<< " List LINK: " << this->getStudentSubList()
+	cout << " ID Number: " << this->getNumber() << " | "
+		<< " Floor: " << this->getFloor() << " | "
+		<< " Type: " << this->getType() << " | "
+		<< " University: " << this->getUniversity() << " | "
+		<< " Faculty: " << this->getFaculty() << " | "
+		<< " Visibility: " << this->getVisibility() << " | "
+		<< " List LINK: " << this->getStudentSubList() << " | "
 		<< " StudCount: " << this->getStudentCount() << endl;
+}
+
+string Audience::TransformObjDataToLine() {
+	ostringstream oss;
+
+	oss << this->getNumber()
+		<< " " << this->getFloor()
+		<< " " << this->getType()
+		<< " " << this->getUniversity()
+		<< " " << this->getFaculty()
+		<< " " << this->getVisibility()
+		<< " " << this->getStudentSubList()
+		<< " " << this->getStudentCount();
+
+	return oss.str();
 }

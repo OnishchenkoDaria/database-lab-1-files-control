@@ -101,6 +101,7 @@ void AddNewAudience() {
 		addNewIndex(obj.getAudienceNumber(), obj.getAudienceLink(), &indexHead);
 		writeNewIndexRecord(obj, "index.txt");
 	}
+	//added else block w/o testing - can cause problems
 	else {
 		return;
 	}
@@ -160,6 +161,7 @@ void AddNewStudent() {
 		addNewIndex(obj.getAudienceNumber(), obj.getAudienceLink(), &studentsHead);
 		writeNewIndexRecord(obj, "studentTable.txt");
 	}
+	//added else block w/o testing - can cause problems
 	else {
 		return;
 	}
@@ -184,7 +186,7 @@ Audience getAudience() {
 	return findAudience(AskForId());
 }
 
-StudentNode findStudentFromFile(int inputId, streampos position) {
+/*StudentNode findStudentFromFile(int inputId, streampos position) {
 	ifstream inFile("students.txt");
 
 	string line = readLineFromPosition(position, "students.txt");
@@ -204,14 +206,28 @@ StudentNode findStudentFromFile(int inputId, streampos position) {
 			cout << "No Student with such Id found!" << endl;
 		}
 	}
+}*/
+
+StudentNode findStudent(int id) {
+	streampos pos = findById(id, studentsHead);
+	if (pos != -1) {
+		string line = readLineFromPosition(pos, "students.txt");
+		return createStudfromLine(line);
+	}
+	else {
+		cerr << "No Student with such Number recorded earlier" << endl;
+		return StudentNode();
+	}
+
+	//use get-m
+	//Audience foundMaster = findAudience(AskForId());
+	//int id = AskForId();
+	//cout << "pos: " << foundMaster.getStudentSubList() << endl;
+	//return findStudentFromFile(id, foundMaster.getStudentSubList());
 }
 
-StudentNode findTheStudent() {
-	//use get-m
-	Audience foundMaster = findAudience(AskForId());
-	int id = AskForId();
-	//cout << "pos: " << foundMaster.getStudentSubList() << endl;
-	return findStudentFromFile(id, foundMaster.getStudentSubList());
+StudentNode getStudent() {
+	return findStudent(AskForId());
 }
 
 void EditAudience(Audience& aud) {

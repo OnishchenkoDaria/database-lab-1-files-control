@@ -47,30 +47,9 @@ public:
 		this->Next = next;
 	}
 
-	void userData() {
-		cout << " Student Id: " << this->getId() << " | "
-			<< " Name: " << this->getName() << " | "
-			<< " BirthDate: " << this->getDate() << " | "
-			<< " Gender: " << this->getGender() << " | "
-			<< " Group: " << this->getGroup() << " | "
-			<< " Audience: " << this->getAudience() << " | "
-			<< " Next Student: " << this->getNextStudent() << endl;
-	}
+	void userData();
 
-	string TransformObjDataToLine() {
-		ostringstream oss;
-
-		oss << this->getId()
-			<< " " << this->getName()
-			<< " " << this->getDate()
-			<< " " << this->getGender()
-			<< " " << this->getGroup()
-			<< " " << this->getAudience()
-			<< " " << this->getVisibility()
-			<< " " << this->getNextStudent();
-
-		return oss.str();
-	}
+	string TransformObjDataToLine();
 
 	void setId(int id);
 
@@ -110,16 +89,3 @@ public:
 	
 	void createObj(indexNode* head);
 };
-
-/*struct StudentList {
-private:
-	StudentNode student;
-	StudentList* Next;
-public:
-	StudentList(StudentNode student) {
-		this->student = student;
-		this->Next = NULL;
-	}
-
-
-};*/

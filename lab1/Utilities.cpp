@@ -43,30 +43,6 @@ string readLineFromPosition(streampos startPos, string fileName) {
 	return line;
 }
 
-StudentNode createStudfromLine(string line) {
-	//cout << "LINE: " << line << endl;
-	istringstream iss(line);
-	int id, audience, position;
-	string name, date, group;
-	char gender;
-	bool visib;
-	streampos pos;
-
-	if (iss >> id >> name >> date >> gender >> group >> audience >> visib >> position) {
-		/*cout << " Student Id: " << id << " | "
-			<< " Name: " << name << " | "
-			<< " BirthDate: " << date << " | "
-			<< " Gender: " << gender << " | "
-			<< " Group: " << group << " | "
-			<< " Audience: " << audience << " | " << endl;*/
-		pos = position;
-		return StudentNode(id, name, date, gender, group, audience, visib);
-	}
-	else {
-		return StudentNode();
-	}
-}
-
 void readStudentFromFile(ifstream& file) {
 	string line;
 	if (getline(file, line)) {
@@ -175,6 +151,24 @@ streampos writeStudentToFile(StudentNode obj) {
 	//outFile.close();
 }
 
+StudentNode createStudfromLine(string line) {
+	//cout << "LINE: " << line << endl;
+	istringstream iss(line);
+	int id, audience, position;
+	string name, date, group;
+	char gender;
+	bool visib;
+	streampos pos;
+
+	if (iss >> id >> name >> date >> gender >> group >> audience >> visib >> position) {
+		pos = position;
+		return StudentNode(id, name, date, gender, group, audience, visib);
+	}
+	else {
+		return StudentNode();
+	}
+}
+
 Audience createAudfromLine(string line) {
 	istringstream iss(line);
 	int num, floor, position, count;
@@ -182,16 +176,6 @@ Audience createAudfromLine(string line) {
 	bool visib;
 	streampos studLink;
 	if (iss >> num >> floor >> type >> uni >> facult >> visib >> position >> count) {
-		/*cout << "AUDIENCE READ:  num " << num << " floor " << floor
-			<< " type: " << type << " uni " << uni
-			<< " facult " << facult << " vis " << visib
-			<< " stud link: " << position << " stud count: " << count << endl;*/
-		cout << endl << " Audience Number: " << num << " | "
-			<< " Floor: " << floor << " | "
-			<< " Type: " << type << " | "
-			<< " University: " << uni << " | "
-			<< " Faculty: " << facult << " | "
-			<< " Overall Students: " << count << endl << endl;
 		studLink = position;
 		return Audience(num, floor, type, uni, facult, visib, studLink, count);
 	}
