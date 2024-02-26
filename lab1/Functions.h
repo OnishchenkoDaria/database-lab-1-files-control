@@ -21,7 +21,7 @@ void readAllIndexTable() {
 
 	while (!inFile.eof()) {
 		indexNode indx = readIndexFromFile(inFile);
-		
+
 		if ((indx.getAudienceLink() != -1) or (indx.getAudienceNumber() != 0)) {
 			//indexHead->printNode();
 			//indx.printNode();
@@ -31,7 +31,7 @@ void readAllIndexTable() {
 
 	sortIndexTable(&indexHead);
 	cout << "AUDIENCE INDEX TABLE" << endl;
-	showAllList(indexHead);
+	//showAllList(indexHead);
 }
 
 void readAllStudentTable() {
@@ -54,7 +54,7 @@ void readAllStudentTable() {
 
 	sortIndexTable(&studentsHead);
 	cout << "STUDENT INDEX TABLE" << endl;
-	showAllList(studentsHead);
+	//showAllList(studentsHead);
 }
 
 void showMasterFile(){
@@ -178,7 +178,7 @@ void AddNewStudent() {
 
 	string replacement = foundAud.TransformObjDataToLine();
 	//cout << "REPLACEMENT: " << replacement << endl;
-	replaceTheLineiInFile(found, replacement);
+	replaceTheLineiInFile(found, replacement, "audience.txt", &indexHead, foundAud.getNumber());
 }
 
 StudentNode findStudent(int id) {
@@ -225,16 +225,18 @@ void EditAudience(Audience& aud) {
 		break;
 	case 'U':
 		cout << "Input new value: "; cin >> newString;
-		aud.setType(newString);
+		aud.setUniversity(newString);
 		break;
 	case 'A':
 		cout << "Input new value: "; cin >> newString;
-		aud.setType(newString);
+		aud.setFaculty(newString);
 		break;
 	}
 	newString = aud.TransformObjDataToLine();
+	//cout << "ssssss:" << newString << endl;
 	found = findKey(aud.getNumber(), indexHead);
-	replaceTheLineiInFile(found, newString);
+	replaceTheLineiInFile(found, newString, "audience.txt", &indexHead, aud.getNumber());
+	//writeSortedIndexTable(&indexHead, "index.txt");
 }
 
 void EditStudent(StudentNode& stud) {
@@ -242,10 +244,9 @@ void EditStudent(StudentNode& stud) {
 	cout << "Press 'N' to change the name data" << endl
 		<< "Press 'B' to change the birthday data" << endl
 		<< "Press 'G' to change the gender data" << endl
-		<< "Press 'J' to change the group data" << endl
-		<< "Press 'A' to change the audience data" << endl;
+		<< "Press 'J' to change the group data" << endl;
 
-	int newAudince{};
+	int newAudience{};
 	string newString;
 	char newGender{};
 	streampos found;
@@ -257,37 +258,49 @@ void EditStudent(StudentNode& stud) {
 	case 'N':
 		cout << "Input new value: "; cin >> newString;
 		stud.setName(newString);
-		newString = stud.TransformObjDataToLine();
-		//
-		replaceTheLineiInFile(found, newString);
 		break;
 	case 'B':
-		/*cout << "Input new value: "; cin >> newString;
-		aud.setType(newString);
-		newString = aud.TransformObjDataToLine();
-		found = indexHead.findKey(aud.getNumber());
-		replaceTheLineiInFile(found, newString);*/
+		cout << "Input new value: "; cin >> newString;
+		stud.setDate(newString);
 		break;
 	case 'G':
-		/*cout << "Input new value: "; cin >> newString;
-		aud.setType(newString);
-		newString = aud.TransformObjDataToLine();
-		found = indexHead.findKey(aud.getNumber());
-		replaceTheLineiInFile(found, newString);*/
+		cout << "Input new value: "; cin >> newGender;
+		stud.setGender(newGender);
 		break;
 	case 'J':
-		/*cout << "Input new value: "; cin >> newString;
-		aud.setType(newString);
-		newString = aud.TransformObjDataToLine();
-		found = indexHead.findKey(aud.getNumber());
-		replaceTheLineiInFile(found, newString);*/
-		break;
-	case 'A':
-		/*cout << "Input new value: "; cin >> newString;
-		aud.setType(newString);
-		newString = aud.TransformObjDataToLine();
-		found = indexHead.findKey(aud.getNumber());
-		replaceTheLineiInFile(found, newString);*/
+		cout << "Input new value: "; cin >> newString;
+		stud.setGroup(newString);
 		break;
 	}
+	newString = stud.TransformObjDataToLine();
+	found = findKey(stud.getId(), studentsHead);
+	replaceTheLineiInFile(found, newString, "students.txt", &studentsHead, stud.getId());
+}
+
+void printIndexList() {
+	showAllList(indexHead);
+}
+
+int MasterCount() {
+	return Count(indexHead);
+}
+
+int SlaveCount() {
+	return Count(studentsHead);
+}
+
+int CountStudentsInAudience() {
+	streampos pos = findById(AskForId(), indexHead);
+	string line = readLineFromPosition(pos, "audience.txt");
+	streampos StudentPos = createAudfromLine(line).getStudentSubList();
+	
+	int count = 0;
+	while (StudentPos != -1) {
+		string studentLine = readLineFromPosition(StudentPos, "students.txt");
+		StudentNode Student = createStudfromLine(studentLine);
+		count++;
+		StudentPos = Student.getNextStudent();
+	}
+	
+	return count;
 }

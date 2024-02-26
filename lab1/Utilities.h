@@ -26,4 +26,4 @@ Audience createAudfromLine(string line);
 
 int streamposToInt(std::streampos pos);
 
-void replaceTheLineiInFile(streampos position, const string& newString);
+void replaceTheLineiInFile(streampos position, const string& newString, string filename, indexNode** head, int id);

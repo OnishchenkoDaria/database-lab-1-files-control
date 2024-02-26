@@ -1,4 +1,5 @@
 #include "indexNode.h"
+#include "Utilities.h"
 
 void indexNode::printNode() {
 	cout << "OBJECT: Item: ID " << this->getAudienceNumber()
@@ -149,6 +150,69 @@ void sortIndexTable(indexNode** head) {
 
 }
 
-/*indexTable indexNode::getItemData() {
-	return this->item;
+/*void changeOfPositions(indexNode** head, int oldStringLength, int newStringLength, int key) {
+	indexNode* temp = *head;
+	indexNode* found = new indexNode;
+	while (temp) {
+		if (temp->getAudienceNumber() == key) {
+			found->setAudienceNumber(temp->getNext()->getAudienceNumber());
+			found->setAudienceLink(temp->getNext()->getAudienceLink());
+		}
+		else if (temp->getAudienceNumber() != key) {
+			temp = temp->getNext();
+		}
+		else if(!temp->getNext()){
+			cerr << "No next element" << endl;
+			return;
+		}
+	}
+
+	int difference = oldStringLength - newStringLength;
+	cout << difference << endl;
+	if (difference != 0) {
+		while (found) {
+			int intAdress = streamposToInt(found->getAudienceLink());
+			found->setAudienceLink(intAdress - difference);
+			found = found->getNext();
+		}
+	}
+	else {
+		return;
+	}
 }*/
+
+void changeOfPositions(indexNode** head, int oldStringLength, int newStringLength, int key) {
+	indexNode* temp = *head;
+	while (temp->getAudienceNumber() != key) {
+		temp = temp->getNext();
+	}
+	temp = temp->getNext();
+
+	int difference = oldStringLength - newStringLength;
+	cout << difference << endl;
+	if (difference < 0) {
+		while (temp) {
+			int intAdress = streamposToInt(temp->getAudienceLink());
+			temp->setAudienceLink(intAdress - difference);
+			temp = temp->getNext();
+		}
+	}
+	else {
+		return;
+	}
+}
+int Count(indexNode* head){
+	int count = 0;
+	if (!head or (head->getAudienceNumber() == 0)) {
+		cerr << "There is no master element" << endl;
+		return count;
+	}
+
+	while (head) {
+		if (head->getAudienceNumber() != -1) {
+			count++;
+		}
+		head = head->getNext();
+	}
+	return count;
+}

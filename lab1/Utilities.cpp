@@ -162,7 +162,7 @@ StudentNode createStudfromLine(string line) {
 
 	if (iss >> id >> name >> date >> gender >> group >> audience >> visib >> position) {
 		pos = position;
-		return StudentNode(id, name, date, gender, group, audience, visib);
+		return StudentNode(id, name, date, gender, group, audience, visib, pos);
 	}
 	else {
 		return StudentNode();
@@ -189,10 +189,10 @@ int streamposToInt(std::streampos pos) {
 	return static_cast<int>(pos);
 }
 
-void replaceTheLineiInFile(streampos position, const string& newString) {
+void replaceTheLineiInFile(streampos position, const string& newString, string filename, indexNode** head, int id) {
 	//ifstream inFile("audience.txt");
 	//ofstream outFile("temp.txt", ios::app);
-	fstream file("audience.txt", ios::in | ios::out);
+	fstream file(filename, ios::in | ios::out);
 	if (!file.is_open()) {
 		cerr << "Error: Failed to open audience file." << std::endl;
 		return;
@@ -200,6 +200,15 @@ void replaceTheLineiInFile(streampos position, const string& newString) {
 	file.seekg(position);
 	string line;
 	getline(file, line);
+
+	//cout << "Old line:" << line << endl;
+	//cout << "New line:" << newString << endl;
+	
+	int length = line.length();
+	//cout << "Length of the string: " << length << std::endl;
+	int lengthNew = newString.length();
+	//cout << "Length of new string: " << lengthNew << std::endl;
+
 	const char* charrArr = line.c_str();
 
 	int pos = streamposToInt(position);
@@ -209,14 +218,9 @@ void replaceTheLineiInFile(streampos position, const string& newString) {
 	}
 
 	file.seekg(position);
-	//ѕ≈–≈–ќЅ»“» Ќј “»ѕ” outFile << ... << ... <<endl (бо воно вносить без переносу)
-	//в≥рн≥ше треба ото написати функц≥ю, €ка ф≥ксую, на ск≥льки (по к≥лькост≥ символ≥в) 
-	//зб≥льшилась/зменшилаьс нова в≥дредагована ≥нфа (у вже готов≥й сроц≥, €ку тре заносити)
-	//≥ в≥дпов≥дно в≥д цього зб≥льшити/зменшити на в≥дпов≥дно одиниць ус≥ position в зв'€зному списку
-	//indexHead (зм≥нити треба вс≥ position на в≥дпов≥дну к≥льк≥сть одиниць починаючи в≥д наступного нода ≥ до к≥нц€)
-	//п≥сл€ такого перепис≥в ус≥х position треба записати оновлений список
+	//cout << "position: " << position << endl;
 	file << newString;
-
+	//changeOfPositions(head, length, lengthNew, id);
 	//check
 	cout << "check after replacement: ";
 	file.seekg(position);
