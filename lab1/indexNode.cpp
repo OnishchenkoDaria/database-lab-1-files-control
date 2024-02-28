@@ -203,7 +203,7 @@ void changeOfPositions(indexNode** head, int oldStringLength, int newStringLengt
 }
 int Count(indexNode* head){
 	int count = 0;
-	if (!head or (head->getAudienceNumber() == 0)) {
+	if (!head or (head->getAudienceNumber() == -1)) {
 		cerr << "There is no master element" << endl;
 		return count;
 	}
@@ -221,12 +221,14 @@ void deleteNode(int id, indexNode** head) {
 	indexNode* temp = *head;
 	indexNode* prev = temp;
 	if (temp->getAudienceNumber() == id) {
+		cout << "FFFFFFF" << temp->getAudienceNumber() << endl;
 		*head = temp->getNext();
 		delete temp;
 		return;
 	}
 	while (temp) {
 		if (temp->getAudienceNumber() == id) {
+			cout << "HHHHHHHHHH" << temp->getAudienceNumber() << endl;
 			prev->setNext(temp->getNext());
 			delete temp;
 			return;

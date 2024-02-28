@@ -1,3 +1,3 @@
- -1 1 lec Knu Fccs 0 100 0
-2 2 lab Kpi Fiot 1 165 2 
- -1 3 lec Kneu Fm 0 -1 0
+ -1 1 le knu fccs 0 31 0
+ 2 2 lab kpi fiot 1 -1 0
+ -1 3 lec kneu fm 0 -1 0

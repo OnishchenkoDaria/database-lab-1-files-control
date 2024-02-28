@@ -73,6 +73,7 @@ int main()
                 }
                 break;
             case 12:
+                printIndexList();
                 removeAudience();
                 break;
             case 13:
@@ -83,7 +84,7 @@ int main()
         cout << endl;
     }
     
-    printIndexList();
+    
 
     //cout << "Hello World!\n";
 }

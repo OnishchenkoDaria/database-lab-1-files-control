@@ -5,12 +5,11 @@ using namespace std;
 struct Garbage
 {
 private:
-	streampos address = -1;
-	Garbage* Next = NULL;
+	streampos address;
+	Garbage* Next;
 public:
 
 	Garbage() {
-		this->address = -1;
 		this->Next = NULL;
 	}
 
@@ -78,7 +77,7 @@ streampos takeAddress(Garbage** head) {
 }
 
 void writeGarbage(Garbage** head, string filename) {
-	ofstream outFile(filename);
+	ofstream outFile(filename, ios::app);
 
 	if (!outFile) {
 		cout << "Error opening index file!" << endl;

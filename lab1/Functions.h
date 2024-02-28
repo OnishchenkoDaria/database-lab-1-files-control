@@ -255,7 +255,6 @@ void EditStudent(StudentNode& stud) {
 	char newGender{};
 	streampos found;
 
-
 	cin >> answer;
 	switch (answer)
 	{
@@ -297,8 +296,9 @@ int CountStudentsInAudience() {
 	streampos pos = findById(AskForId(), indexHead);
 	string line = readLineFromPosition(pos, "audience.txt");
 	streampos StudentPos = createAudfromLine(line).getStudentSubList();
-	
+
 	int count = 0;
+	
 	while (StudentPos != -1) {
 		string studentLine = readLineFromPosition(StudentPos, "students.txt");
 		StudentNode Student = createStudfromLine(studentLine);
@@ -382,9 +382,6 @@ void removeAudience() {
 	}
 
 	streampos address = findById(aud.getNumber(), indexHead);
-	aud.changeVisibility();
-	aud.setStudentCount(0);
-	aud.setNumber(-1);
 	streampos firststudent = aud.getStudentSubList();
 
 	while (firststudent != -1) {
@@ -393,10 +390,13 @@ void removeAudience() {
 		removeStudent(Student.getId());
 		firststudent = Student.getNextStudent();
 	}	
+	//cout << "jyujyykykyk: " << aud.getNumber() << endl;
 	deleteNode(aud.getNumber(), &indexHead);
 	AddNewGarbageAddress(&audienceGarbage, address);
-
-	replaceTheLineiInFile(address, aud.TransformObjDataToLine(), "audience.txt");
 	writeSortedIndexTable(&indexHead, "index.txt");
 	writeGarbage(&audienceGarbage, "audienceGarbage.txt");
+	aud.changeVisibility();
+	aud.setNumber(-1);
+	aud.setStudentCount(0);
+	replaceTheLineiInFile(address, aud.TransformObjDataToLine(), "audience.txt");
 }
