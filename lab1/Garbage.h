@@ -10,6 +10,7 @@ private:
 public:
 
 	Garbage() {
+		this->address = -1;
 		this->Next = NULL;
 	}
 
@@ -54,21 +55,18 @@ void AddNewGarbageAddress(Garbage** head, streampos address) {
 	}
 
 	Garbage* temp = new Garbage(address);
-	//temp->setAddress(address);
-	//if(!(*head)){
-	//	*head = temp;
-	//}
-
+	
 	temp->setNext(*head);
 	*head = temp;
 }
 
 streampos takeAddress(Garbage** head) {
-	if (!(*head)) {
+	
+	Garbage* temp = *head;
+	if (!temp or (temp->getAddress() == -1)) {
 		return -1;
 	}
-
-	Garbage* temp = *head;
+		
 	streampos address = (temp)->getAddress();
 	*head = temp->getNext();
 
@@ -77,7 +75,7 @@ streampos takeAddress(Garbage** head) {
 }
 
 void writeGarbage(Garbage** head, string filename) {
-	ofstream outFile(filename, ios::app);
+	ofstream outFile(filename);
 
 	if (!outFile) {
 		cout << "Error opening index file!" << endl;

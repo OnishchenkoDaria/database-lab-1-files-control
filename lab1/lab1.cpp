@@ -11,24 +11,26 @@ int main()
 {
     readAllIndexTable();
     readAllStudentTable();
+
+    cout << "--------------------------------------------------------" << endl
+        << "Press '1' to Add Audience (master)" << endl
+        << "Press '2' to Add Student (slave)" << endl
+        << "Press '3' to show all Audiences (master) - ut-m" << endl
+        << "Press '4' to show all Students (slave) - ut-s" << endl
+        << "Press '5' to get Audience (master) by Number" << endl
+        << "Press '6' to get Student (slave) by Id" << endl
+        << "Press '7' to calculate all Audiences (master) records" << endl
+        << "Press '8' to calculate all Student (slave) records" << endl
+        << "Press '9' to calculate all Audience's sub records" << endl
+        << "Press '10' to edit Audience (master) record by Number" << endl
+        << "Press '11' to edit Student (slave) record by Id" << endl
+        << "Press '12' to remove Audience (master) record by Id" << endl
+        << "Press '13' to remove Student (slave) record by Id" << endl
+        << "--------------------------------------------------------" << endl;
+
     int option = 0;
     while (true) {
-        
-        cout << "--------------------------------------------------------" << endl
-            << "Press '1' to Add Audience (master)" << endl
-            << "Press '2' to Add Student (slave)" << endl
-            << "Press '3' to show all Audiences (master) - ut-m" << endl
-            << "Press '4' to show all Students (slave) - ut-s" << endl
-            << "Press '5' to get Audience (master) by Number" << endl
-            << "Press '6' to get Student (slave) by Id" << endl
-            << "Press '7' to calculate all Audiences (master) records" << endl
-            << "Press '8' to calculate all Student (slave) records" << endl
-            << "Press '9' to calculate all Audience's sub records" << endl
-            << "Press '10' to edit Audience (master) record by Number" << endl
-            << "Press '11' to edit Student (slave) record by Id" << endl
-            << "Press '12' to remove Audience (master) record by Id" << endl
-            << "Press '13' to remove Student (slave) record by Id" << endl
-            << "--------------------------------------------------------" << endl;
+        cout << endl << "Choose option: ";
         Audience aud;
         StudentNode stud;
         cin >> option;
@@ -73,7 +75,7 @@ int main()
                 }
                 break;
             case 12:
-                printIndexList();
+                //printIndexList();
                 removeAudience();
                 break;
             case 13:
