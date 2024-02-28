@@ -7,9 +7,13 @@
 #include "StudentNode.h"
 #include "Utilities.h"
 #include "indexNode.h"
+#include "Garbage.h"
 
 indexNode* indexHead = new indexNode;
 indexNode* studentsHead = new indexNode;
+
+Garbage* audienceGarbage = new Garbage;
+Garbage* studentsGarbage = new Garbage;
 
 void readAllIndexTable() {
 	ifstream inFile("index.txt");
@@ -304,3 +308,4 @@ int CountStudentsInAudience() {
 	
 	return count;
 }
+

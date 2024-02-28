@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Audience.cpp" />
     <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="Garbage.cpp" />
     <ClCompile Include="lab1.cpp" />
     <ClCompile Include="indexNode.cpp" />
     <ClCompile Include="StudentNode.cpp" />
@@ -137,6 +138,7 @@
   <ItemGroup>
     <ClInclude Include="Audience.h" />
     <ClInclude Include="Functions.h" />
+    <ClInclude Include="Garbage.h" />
     <ClInclude Include="indexNode.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="StudentNode.h" />
