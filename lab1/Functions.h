@@ -309,117 +309,47 @@ int CountStudentsInAudience() {
 	return count;
 }
 
-/*streampos changeLinks(indexNode** head, Audience& aud, int id) {
-	indexNode* temp = *head;
-	//streampos address;
-	if (aud.getStudentSubList() != temp->getAudienceLink()) {
-		indexNode* prev = temp;
-		while (temp) {
-			temp->printNode();
-			if (temp->getAudienceNumber() == id) {
-				if (temp->getNext()) {
-					cout << "HERREEEE 1" << endl;
-					prev->setNext(temp->getNext());
-				}
-				else {
-					cout << "HERREEEE 2" << endl;
-					prev->setNext(NULL);
-				}
-				//rewrite the info in students.Table
-				
-				string line = readLineFromPosition(prev->getAudienceLink(), "students.txt");
-				StudentNode prevStud = createStudfromLine(line);
-				prevStud.userData();
-				prevStud.setNext(temp->getNext()->getAudienceLink());
-				cout<<"changed next"<<endl; prevStud.userData();
-				cout << "data to line: " << prevStud.TransformObjDataToLine() << endl;
-				replaceTheLineiInFile(prev->getAudienceLink(), prevStud.TransformObjDataToLine(), "students.txt");
-				writeSortedIndexTable(head, "studentTable.txt");
-				delete temp;
-				return temp->getAudienceLink();
-			}
-			else {
-				prev = temp;
-				temp = temp->getNext();
-			}
-		}
-	}
-	else {
-		aud.setStudentSubList(temp->getNext()->getAudienceLink());
-		*head = temp->getNext();
-		//write new audience info in file
-		string newString = aud.TransformObjDataToLine();
-		//cout << "ssssss:" << newString << endl;
-		streampos found = findKey(aud.getNumber(), indexHead);
-		replaceTheLineiInFile(found, newString, "audience.txt");
-		delete temp;
-		return temp->getAudienceLink();
-	}
-}*/
-
-/*void removeStudent() {
-	StudentNode stud = getStudent();
-	stud.userData();
-	if (stud.getId() == -1) {
-		return;
-	}
-	stud.changeVisibility();
-	stud.userData(); cout << "visib: " <<stud.getVisibility() << endl;
-	Audience aud = findAudience(stud.getAudience());
-	aud.showObject();*/
-	/*streampos address = changeLinks(&studentsHead, aud, stud.getId());
-	cout << "Address deleted : " << address << endl;
-	AddNewGarbageAddress(&studentsGarbage, address);
-	stud.setId(-1);
-	string newString = stud.TransformObjDataToLine();
-	cout << "newString: " << newString << endl;
-	streampos found = findKey(stud.getId(), studentsHead);
-	replaceTheLineiInFile(found, newString, "students.txt");
-	writeSortedIndexTable(&studentsHead, "studentTable.txt");
-	writeGarbage(&studentsGarbage, "studentGarbage");*/
-//}
-
-void removeStudent() {
-	StudentNode stud = getStudent();
-	stud.userData();
+void removeStudent(int id) {
+	StudentNode stud = findStudent(id);
+	//stud.userData();
 	streampos studAddress;
-	stud.userData();
+	//stud.userData();
 	if (stud.getId() == -1) {
 		return;
 	}
 
 	Audience aud = findAudience(stud.getAudience());
-	aud.showObject();
+	//aud.showObject();
 	streampos audPos = findById(aud.getNumber(), indexHead);
-	cout << "audPos: " << audPos << endl;
+	//cout << "audPos: " << audPos << endl;
 	streampos address = aud.getStudentSubList();
 	string line = readLineFromPosition(address, "students.txt");
 	StudentNode currStud = createStudfromLine(line);
-	currStud.userData();
+	//currStud.userData();
 
 	if (stud.getId() == currStud.getId()) {
-		cout << "HEREEEEEE 1" << endl;
+		//cout << "HEREEEEEE 1" << endl;
 		studAddress = aud.getStudentSubList();
 		aud.setStudentSubList(currStud.getNextStudent());
 	}
 	else {
 		StudentNode prevStud;
 		while (currStud.getId() != stud.getId()) {
-			cout << "HEREEEEEE 2" << endl;
+			//cout << "HEREEEEEE 2" << endl;
 			prevStud = currStud;
 			string nextStudLine = readLineFromPosition(currStud.getNextStudent(), "students.txt");
 			currStud = createStudfromLine(nextStudLine);
 		}
 
 		studAddress = prevStud.getNextStudent();
-		cout << "studAddress: " << studAddress << endl;
+		//cout << "studAddress: " << studAddress << endl;
 		
 		if (currStud.getNextStudent()) {
-			cout << "HEREEEEEE 3" << endl;
+			//cout << "HEREEEEEE 3" << endl;
 			prevStud.setNextStudent(currStud.getNextStudent());
 		}
 		else {
-			cout << "HEREEEEEE 4" << endl;
+			//cout << "HEREEEEEE 4" << endl;
 			prevStud.setNextStudent(-1);
 		}
 		streampos prevAdrs = findById(prevStud.getId(), studentsHead);
@@ -428,19 +358,45 @@ void removeStudent() {
 	}
 	//видалення з таблиці індексів студентів
 	deleteNode(stud.getId(), &studentsHead);
-	cout << "sdfsf" << endl;
+	//cout << "sdfsf" << endl;
 	aud.setStudentCount(aud.getStudentCount() - 1);
 	stud.changeVisibility();
 	stud.setId(-1);
-	aud.showObject();
-	stud.userData();
+	//aud.showObject();
+	//stud.userData();
 	AddNewGarbageAddress(&studentsGarbage, studAddress);
 
 	//зафіксувати все у  файлах
-	cout << "1: " << aud.TransformObjDataToLine() << endl;
-	cout << "2: " << stud.TransformObjDataToLine() << endl;
+	//cout << "1: " << aud.TransformObjDataToLine() << endl;
+	//cout << "2: " << stud.TransformObjDataToLine() << endl;
 	replaceTheLineiInFile(audPos, aud.TransformObjDataToLine(), "audience.txt");
 	replaceTheLineiInFile(studAddress, stud.TransformObjDataToLine(), "students.txt");
 	writeSortedIndexTable(&studentsHead, "studentTable.txt");
 	writeGarbage(&studentsGarbage, "studentGarbage.txt");
+}
+
+void removeAudience() {
+	Audience aud = getAudience();
+	if (aud.getNumber() == -1) {
+		return;
+	}
+
+	streampos address = findById(aud.getNumber(), indexHead);
+	aud.changeVisibility();
+	aud.setStudentCount(0);
+	aud.setNumber(-1);
+	streampos firststudent = aud.getStudentSubList();
+
+	while (firststudent != -1) {
+		string studentLine = readLineFromPosition(firststudent, "students.txt");
+		StudentNode Student = createStudfromLine(studentLine);
+		removeStudent(Student.getId());
+		firststudent = Student.getNextStudent();
+	}	
+	deleteNode(aud.getNumber(), &indexHead);
+	AddNewGarbageAddress(&audienceGarbage, address);
+
+	replaceTheLineiInFile(address, aud.TransformObjDataToLine(), "audience.txt");
+	writeSortedIndexTable(&indexHead, "index.txt");
+	writeGarbage(&audienceGarbage, "audienceGarbage.txt");
 }

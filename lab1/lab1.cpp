@@ -26,7 +26,8 @@ int main()
             << "Press '9' to calculate all Audience's sub records" << endl
             << "Press '10' to edit Audience (master) record by Number" << endl
             << "Press '11' to edit Student (slave) record by Id" << endl
-            << "Press '13' to delete Student (slave) record by Id" << endl
+            << "Press '12' to remove Audience (master) record by Id" << endl
+            << "Press '13' to remove Student (slave) record by Id" << endl
             << "--------------------------------------------------------" << endl;
         Audience aud;
         StudentNode stud;
@@ -71,8 +72,12 @@ int main()
                     EditStudent(stud);
                 }
                 break;
+            case 12:
+                removeAudience();
+                break;
             case 13:
-                removeStudent();
+                int id = AskForId();
+                removeStudent(id);
                 break;
         }
         cout << endl;
