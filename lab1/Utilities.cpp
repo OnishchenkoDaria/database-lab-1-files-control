@@ -189,7 +189,7 @@ int streamposToInt(std::streampos pos) {
 	return static_cast<int>(pos);
 }
 
-void replaceTheLineiInFile(streampos position, const string& newString, string filename, indexNode** head, int id) {
+void replaceTheLineiInFile(streampos position, const string& newString, string filename) {
 	//ifstream inFile("audience.txt");
 	//ofstream outFile("temp.txt", ios::app);
 	fstream file(filename, ios::in | ios::out);
@@ -201,12 +201,12 @@ void replaceTheLineiInFile(streampos position, const string& newString, string f
 	string line;
 	getline(file, line);
 
-	//cout << "Old line:" << line << endl;
-	//cout << "New line:" << newString << endl;
+	cout << "Old line:" << line << endl;
+	cout << "New line:" << newString << endl;
 	
-	int length = line.length();
+	//int length = line.length();
 	//cout << "Length of the string: " << length << std::endl;
-	int lengthNew = newString.length();
+	//int lengthNew = newString.length();
 	//cout << "Length of new string: " << lengthNew << std::endl;
 
 	const char* charrArr = line.c_str();

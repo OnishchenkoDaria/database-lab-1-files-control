@@ -56,4 +56,6 @@ void sortIndexTable(indexNode** head);
 
 void changeOfPositions(indexNode** head, int oldStringLength, int newStringLength, int key);
 
-int Count(indexNode* head);;
+int Count(indexNode* head);
+
+void deleteNode(int id, indexNode** head);

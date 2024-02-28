@@ -10,17 +10,18 @@ private:
 public:
 
 	Garbage() {
-		setAddress(-1);
-		setNext(NULL);
+		this->address = -1;
+		this->Next = NULL;
 	}
 
 	Garbage(streampos pos) {
-		setAddress(pos);
+		this->address = pos;
+		this->Next = NULL;
 	}
 
 	Garbage(streampos pos, Garbage* next) {
-		setAddress(pos);
-		setNext(next);
+		this->address = pos;
+		this->Next = next;
 	}
 
 	void setAddress(streampos pos) {
@@ -47,7 +48,7 @@ bool checkEmpty(Garbage* head) {
 		return false;
 }
 
-void AddNewAddress(Garbage** head, streampos address) {
+void AddNewGarbageAddress(Garbage** head, streampos address) {
 	if (address < 0) {
 		cerr << "Invalid address. Error adding to garbage" << endl;
 		return;
@@ -74,4 +75,22 @@ streampos takeAddress(Garbage** head) {
 
 	delete temp;
 	return address;	
+}
+
+void writeGarbage(Garbage** head, string filename) {
+	ofstream outFile(filename);
+
+	if (!outFile) {
+		cout << "Error opening index file!" << endl;
+		return;
+	}
+
+	Garbage* temp = *head;
+	while (temp) {
+		//cout << temp->getAudienceNumber() << " " << temp->getAudienceLink() << endl;
+		outFile << temp->getAddress() << " " << endl;
+		temp = temp->getNext();
+	}
+
+	outFile.close();
 }

@@ -216,3 +216,24 @@ int Count(indexNode* head){
 	}
 	return count;
 }
+
+void deleteNode(int id, indexNode** head) {
+	indexNode* temp = *head;
+	indexNode* prev = temp;
+	if (temp->getAudienceNumber() == id) {
+		*head = temp->getNext();
+		delete temp;
+		return;
+	}
+	while (temp) {
+		if (temp->getAudienceNumber() == id) {
+			prev->setNext(temp->getNext());
+			delete temp;
+			return;
+		}
+		else {
+			prev = temp;
+			temp = temp->getNext();
+		}
+	}
+}
