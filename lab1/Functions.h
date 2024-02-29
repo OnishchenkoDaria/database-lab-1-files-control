@@ -141,24 +141,18 @@ void AddNewAudience() {
 		cerr << "The item with such Id already exist!" << endl;
 		return;
 	}
-	cout << "1" << endl;
-	aud.showObject();
-	//printGarbage(audienceGarbage);
+	
 	streampos freeAddress;
-	//cout << "check: " << checkEmpty(audienceGarbage) << endl;
+	
 	if (checkEmpty(audienceGarbage) == false) {
-		cout << "yipppiiiieeee!" << endl;
 		freeAddress = takeAddress(&audienceGarbage);
 		replaceTheLineiInFile(freeAddress, aud.TransformObjDataToLine(), "audience.txt");
 		writeGarbage(&audienceGarbage, "audienceGarbage.txt");
 	} 
 	else {
-		cout << "here, new" << endl;
 		freeAddress = writeAudienceToFile(aud);
-		cout << "pos: " << freeAddress << endl;
 	}
-	//streampos startPos = writeAudienceToFile(aud);
-	cout << "2" << endl;
+
 	if (freeAddress != -1) {
 		indexNode obj(aud.getNumber(), freeAddress);
 		addNewIndex(obj.getAudienceNumber(), obj.getAudienceLink(), &indexHead);
