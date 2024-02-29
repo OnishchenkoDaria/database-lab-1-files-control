@@ -52,7 +52,7 @@ void readStudentGarbage() {
 	}
 
 	file.close();
-	printGarbage(studentsGarbage);
+	//printGarbage(studentsGarbage);
 }
 
 void readAudienceGarbage() {
@@ -73,7 +73,7 @@ void readAudienceGarbage() {
 	}
 
 	file.close();
-	printGarbage(audienceGarbage);
+	//printGarbage(audienceGarbage);
 }
 
 void readAllStudentTable() {
@@ -435,4 +435,9 @@ void removeAudience() {
 void isEmty() {
 	cout << "is empty audience: " << checkEmpty(audienceGarbage) << endl;
 	cout << "is empty students: " << checkEmpty(studentsGarbage) << endl;
+}
+
+void writeGarbage() {
+	writeGarbage(&audienceGarbage, "audienceGarbage.txt");
+	writeGarbage(&audienceGarbage, "audienceGarbage.txt");
 }
