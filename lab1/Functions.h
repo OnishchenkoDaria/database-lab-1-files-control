@@ -208,12 +208,21 @@ void AddNewStudent() {
 		stud.setNext(foundAud.getStudentSubList());
 		//update the student attribute in audience master file
 	}
-	//stud.userData();
 
-	streampos NewStudentsHeadPos = writeStudentToFile(stud);
+	streampos freeAddress;
+
+	if (checkEmpty(studentsGarbage) == false) {
+		freeAddress = takeAddress(&studentsGarbage);
+		replaceTheLineiInFile(freeAddress, stud.TransformObjDataToLine(), "students.txt");
+		writeGarbage(&studentsGarbage, "studentGarbage.txt");
+	}
+	else {
+		freeAddress = writeStudentToFile(stud);
+	}
+	//streampos NewStudentsHeadPos = writeStudentToFile(stud);
 	
-	if (NewStudentsHeadPos != -1) {
-		indexNode obj(stud.getId(), NewStudentsHeadPos);
+	if (freeAddress != -1) {
+		indexNode obj(stud.getId(), freeAddress);
 		cout << "new student index object: "; obj.printNode();
 		addNewIndex(obj.getAudienceNumber(), obj.getAudienceLink(), &studentsHead);
 		writeNewIndexRecord(obj, "studentTable.txt");
@@ -225,17 +234,11 @@ void AddNewStudent() {
 
 	sortIndexTable(&studentsHead);
 	writeSortedIndexTable(&studentsHead, "studentTable.txt");
-	//int prevCount = foundAud.getStudentCount();
-	//cout << "prevCount: " << prevCount << endl;
 
 	foundAud.setStudentCount(foundAud.getStudentCount() + 1);
-	//cout << "newCount: " << foundAud.getStudentCount() << endl;
-
-	foundAud.setStudentSubList(NewStudentsHeadPos);
-	//cout << "newStudentSubList: " << foundAud.getStudentSubList() << endl;
+	foundAud.setStudentSubList(freeAddress);
 
 	string replacement = foundAud.TransformObjDataToLine();
-	//cout << "REPLACEMENT: " << replacement << endl;
 	replaceTheLineiInFile(found, replacement, "audience.txt");
 }
 
