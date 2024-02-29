@@ -12,8 +12,8 @@
 indexNode* indexHead = new indexNode;
 indexNode* studentsHead = new indexNode;
 
-Garbage* audienceGarbage = new Garbage;
-Garbage* studentsGarbage = new Garbage;
+Garbage* audienceGarbage = new Garbage(-1);
+Garbage* studentsGarbage = new Garbage(-1);
 
 void readAllIndexTable() {
 	ifstream inFile("index.txt");
@@ -141,10 +141,26 @@ void AddNewAudience() {
 		cerr << "The item with such Id already exist!" << endl;
 		return;
 	}
-	
-	streampos startPos = writeAudienceToFile(aud);
-	if (startPos != -1) {
-		indexNode obj(aud.getNumber(), startPos);
+	cout << "1" << endl;
+	aud.showObject();
+	//printGarbage(audienceGarbage);
+	streampos freeAddress;
+	//cout << "check: " << checkEmpty(audienceGarbage) << endl;
+	if (checkEmpty(audienceGarbage) == false) {
+		cout << "yipppiiiieeee!" << endl;
+		freeAddress = takeAddress(&audienceGarbage);
+		replaceTheLineiInFile(freeAddress, aud.TransformObjDataToLine(), "audience.txt");
+		writeGarbage(&audienceGarbage, "audienceGarbage.txt");
+	} 
+	else {
+		cout << "here, new" << endl;
+		freeAddress = writeAudienceToFile(aud);
+		cout << "pos: " << freeAddress << endl;
+	}
+	//streampos startPos = writeAudienceToFile(aud);
+	cout << "2" << endl;
+	if (freeAddress != -1) {
+		indexNode obj(aud.getNumber(), freeAddress);
 		addNewIndex(obj.getAudienceNumber(), obj.getAudienceLink(), &indexHead);
 		writeNewIndexRecord(obj, "index.txt");
 	}

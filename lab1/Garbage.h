@@ -42,7 +42,7 @@ public:
 };
 
 bool checkEmpty(Garbage* head) {
-	if (head->getAddress() != -1)
+	if (head->getAddress() == -1 or !(&head) or !head)
 		return true;
 	else
 		return false;
@@ -70,12 +70,19 @@ streampos takeAddress(Garbage** head) {
 	if (!temp or (temp->getAddress() == -1)) {
 		return -1;
 	}
-		
-	streampos address = (temp)->getAddress();
-	*head = temp->getNext();
-
-	delete temp;
-	return address;	
+	else {
+		streampos address = (temp)->getAddress();
+		if (temp->getNext()) {
+			*head = temp->getNext();
+			delete temp;
+			return address;
+		}
+		else {
+			(*head)->setAddress(-1);
+			(*head)->setNext(NULL);
+			return address;
+		}
+	}	
 }
 
 void writeGarbage(Garbage** head, string filename) {
@@ -85,14 +92,17 @@ void writeGarbage(Garbage** head, string filename) {
 		cout << "Error opening index file!" << endl;
 		return;
 	}
-
-	Garbage* temp = *head;
-	while (temp) {
-		//cout << temp->getAudienceNumber() << " " << temp->getAudienceLink() << endl;
-		outFile << temp->getAddress() << " " << endl;
-		temp = temp->getNext();
+	if (!(*head)) {
+		outFile << -1 << endl;
 	}
-
+	else {
+		Garbage* temp = *head;
+		while (temp) {
+			//cout << temp->getAudienceNumber() << " " << temp->getAudienceLink() << endl;
+			outFile << temp->getAddress() << " " << endl;
+			temp = temp->getNext();
+		}
+	}
 	outFile.close();
 }
 

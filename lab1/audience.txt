@@ -1,2 +1,6 @@
- 1 1 1 1 1 1 26 2
- -1 2 2 2 22 0 -1 0
+ 1 1 lec knu fccs 1 -1 0
+ 2 2 lab kpi fiot 1 -1 0
+ 3 3 lec knu fccs 1 -1 0
+ 4 4 lec kpi fiot 1 -1 0 
+ 5 5 lab nau fm 1 -1 0
+ 6 6 lec knu fccs 1 -1 0
