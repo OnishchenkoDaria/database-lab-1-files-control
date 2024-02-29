@@ -1,16 +1,14 @@
-﻿// lab1.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
-//#include <iostream>
-//#include "Audience.h"
-//#include "indexNode.h"
-#include "Functions.h"
+﻿#include "Functions.h"
 using namespace std;
 
 int main()
 {
     readAllIndexTable();
     readAllStudentTable();
+  //  readAudienceGarbage("audienceGarbage.txt");
+    readStudentGarbage();
+    readAudienceGarbage();
+    isEmty();
 
     cout << "--------------------------------------------------------" << endl
         << "Press '1' to Add Audience (master)" << endl

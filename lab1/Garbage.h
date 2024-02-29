@@ -42,7 +42,7 @@ public:
 };
 
 bool checkEmpty(Garbage* head) {
-	if (head == NULL)
+	if (head->getAddress() != -1)
 		return true;
 	else
 		return false;
@@ -55,7 +55,11 @@ void AddNewGarbageAddress(Garbage** head, streampos address) {
 	}
 
 	Garbage* temp = new Garbage(address);
-	
+	if ((*head)->getAddress() == -1) {
+		*head = temp;
+		return;
+	}
+
 	temp->setNext(*head);
 	*head = temp;
 }
@@ -90,4 +94,12 @@ void writeGarbage(Garbage** head, string filename) {
 	}
 
 	outFile.close();
+}
+
+void printGarbage(Garbage* head) {
+	cout << "head: ";
+	while (head) {
+		cout << head->getAddress() << endl;
+		head = head->getNext();
+	}
 }

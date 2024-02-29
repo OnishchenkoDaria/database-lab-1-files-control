@@ -38,6 +38,50 @@ void readAllIndexTable() {
 	//showAllList(indexHead);
 }
 
+void readStudentGarbage() {
+	ifstream file("studentGarbage.txt");
+
+	if (!file.is_open()) {
+		cerr << "error opening file: " << "studentGarbage.txt" << endl;
+		return;
+	}
+
+	string line;
+	//streampos address;
+	while (getline(file, line)) {
+		stringstream ss(line);
+		int position;
+		ss >> position;
+		streampos adr = position;
+		AddNewGarbageAddress(&studentsGarbage, adr);
+	}
+
+	file.close();
+	printGarbage(studentsGarbage);
+}
+
+void readAudienceGarbage() {
+	ifstream file("audienceGarbage.txt");
+
+	if (!file.is_open()) {
+		cerr << "error opening file: " << "audienceGarbage.txt" << endl;
+		return;
+	}
+
+	string line;
+	//streampos address;
+	while (getline(file, line)) {
+		stringstream ss(line);
+		int position;
+		ss >> position;
+		streampos adr = position;
+		AddNewGarbageAddress(&audienceGarbage, adr);
+	}
+
+	file.close();
+	printGarbage(audienceGarbage);
+}
+
 void readAllStudentTable() {
 	ifstream inFile("studentTable.txt");
 
@@ -399,4 +443,9 @@ void removeAudience() {
 	aud.setNumber(-1);
 	aud.setStudentCount(0);
 	replaceTheLineiInFile(address, aud.TransformObjDataToLine(), "audience.txt");
+}
+
+void isEmty() {
+	cout << "is empty audience: " << checkEmpty(audienceGarbage) << endl;
+	cout << "is empty students: " << checkEmpty(studentsGarbage) << endl;
 }

@@ -4,6 +4,7 @@
 #include "Audience.h"
 #include "StudentNode.h"
 #include "indexNode.h"
+//#include "Garbage.h"
 #include <sstream>
 
 void readAudFromFile(ifstream& file);
@@ -15,6 +16,8 @@ StudentNode createStudfromLine(string line);
 void readStudentFromFile(ifstream& file);
 
 indexNode readIndexFromFile(ifstream& file);
+
+streampos readGarbageFromFile(string fileName);
 
 streampos writeAudienceToFile(Audience obj);
 
