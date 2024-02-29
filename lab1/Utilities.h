@@ -4,7 +4,6 @@
 #include "Audience.h"
 #include "StudentNode.h"
 #include "indexNode.h"
-//#include "Garbage.h"
 #include <sstream>
 
 void readAudFromFile(ifstream& file);

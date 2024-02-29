@@ -5,11 +5,9 @@ int main()
 {
     readAllIndexTable();
     readAllStudentTable();
-  //  readAudienceGarbage("audienceGarbage.txt");
     readStudentGarbage();
     readAudienceGarbage();
-    isEmty();
-
+   
     cout << "--------------------------------------------------------" << endl
         << "Press '1' to Add Audience (master)" << endl
         << "Press '2' to Add Student (slave)" << endl

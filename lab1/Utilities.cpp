@@ -137,7 +137,7 @@ streampos writeStudentToFile(StudentNode obj) {
 	}
 	outFile << " ";
 	streampos startPos = outFile.tellp();
-	cout << "POSITION IN STUDENT FILE: " << startPos << endl;
+	//cout << "POSITION IN STUDENT FILE: " << startPos << endl;
 	outFile << obj.getId() << " "
 		<< obj.getName() << " "
 		<< obj.getDate() << " "
@@ -190,8 +190,6 @@ int streamposToInt(std::streampos pos) {
 }
 
 void replaceTheLineiInFile(streampos position, const string& newString, string filename) {
-	//ifstream inFile("audience.txt");
-	//ofstream outFile("temp.txt", ios::app);
 	fstream file(filename, ios::in | ios::out);
 	if (!file.is_open()) {
 		cerr << "Error: Failed to open audience file." << std::endl;
@@ -200,14 +198,6 @@ void replaceTheLineiInFile(streampos position, const string& newString, string f
 	file.seekg(position);
 	string line;
 	getline(file, line);
-
-	cout << "Old line:" << line << endl;
-	cout << "New line:" << newString << endl;
-	
-	//int length = line.length();
-	//cout << "Length of the string: " << length << std::endl;
-	//int lengthNew = newString.length();
-	//cout << "Length of new string: " << lengthNew << std::endl;
 
 	const char* charrArr = line.c_str();
 
@@ -218,11 +208,9 @@ void replaceTheLineiInFile(streampos position, const string& newString, string f
 	}
 
 	file.seekg(position);
-	//cout << "position: " << position << endl;
+	
 	file << newString;
-	//changeOfPositions(head, length, lengthNew, id);
-	//check
-	cout << "check after replacement: ";
+	
 	file.seekg(position);
 	string line1;
 	getline(file, line1);

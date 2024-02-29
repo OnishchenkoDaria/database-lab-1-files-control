@@ -83,6 +83,6 @@ string Audience::TransformObjDataToLine() {
 		<< " " << this->getVisibility()
 		<< " " << this->getStudentSubList()
 		<< " " << this->getStudentCount();
-	cout << "create:" << oss.str() << endl;
+	//cout << "create:" << oss.str() << endl;
 	return oss.str();
 }

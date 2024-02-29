@@ -41,7 +41,6 @@ void writeSortedIndexTable(indexNode** head, string filename) {
 
 	indexNode* temp = *head;
 	while (temp) {
-		//cout << temp->getAudienceNumber() << " " << temp->getAudienceLink() << endl;
 		outFile << temp->getAudienceNumber() << " " << temp->getAudienceLink() << endl;
 		temp = temp->getNext();
 	}
@@ -72,7 +71,6 @@ void showAllList(indexNode* head) {
 }
 
 streampos findById(int id, indexNode* head) {
-	//indexNode* temp = head;
 	while (head) {
 		if (head->getAudienceNumber() == id) {
 			return head->getAudienceLink();
@@ -81,15 +79,12 @@ streampos findById(int id, indexNode* head) {
 			head = head->getNext();
 		}
 	}
-	//cout << "No such item with id: " << id << endl;
 	return -1;
 }
 
 streampos findKey(int AudNumber, indexNode* head) {
 	while (head != NULL) {
 		if (head->getAudienceNumber() == AudNumber) {
-			/*cout << "Found: Audience: " << head->getAudienceNumber()
-				<< "   Link: " << head->getAudienceLink() << endl;*/
 			return head->getAudienceLink();
 		}
 		else {
@@ -150,37 +145,6 @@ void sortIndexTable(indexNode** head) {
 
 }
 
-/*void changeOfPositions(indexNode** head, int oldStringLength, int newStringLength, int key) {
-	indexNode* temp = *head;
-	indexNode* found = new indexNode;
-	while (temp) {
-		if (temp->getAudienceNumber() == key) {
-			found->setAudienceNumber(temp->getNext()->getAudienceNumber());
-			found->setAudienceLink(temp->getNext()->getAudienceLink());
-		}
-		else if (temp->getAudienceNumber() != key) {
-			temp = temp->getNext();
-		}
-		else if(!temp->getNext()){
-			cerr << "No next element" << endl;
-			return;
-		}
-	}
-
-	int difference = oldStringLength - newStringLength;
-	cout << difference << endl;
-	if (difference != 0) {
-		while (found) {
-			int intAdress = streamposToInt(found->getAudienceLink());
-			found->setAudienceLink(intAdress - difference);
-			found = found->getNext();
-		}
-	}
-	else {
-		return;
-	}
-}*/
-
 void changeOfPositions(indexNode** head, int oldStringLength, int newStringLength, int key) {
 	indexNode* temp = *head;
 	while (temp->getAudienceNumber() != key) {
@@ -221,7 +185,6 @@ void deleteNode(int id, indexNode** head) {
 	indexNode* temp = *head;
 	indexNode* prev = temp;
 	if (temp->getAudienceNumber() == id) {
-		cout << "FFFFFFF" << temp->getAudienceNumber() << endl;
 		*head = temp->getNext();
 		delete temp;
 		return;
